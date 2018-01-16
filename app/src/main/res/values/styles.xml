@@ -8,4 +8,44 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--Button 自定义颜色-->
+    <style name="ButtonStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/androidblack</item>
+    </style>
+
+    <style name="ButtonStyle.bg_blue">
+        <item name="android:background">@drawable/dra_btn_blue</item>
+    </style>
+    <style name="ButtonStyle.bg_red">
+        <item name="android:background">@drawable/dra_btn_red</item>
+    </style>
+    <style name="ButtonStyle.bg_yellow">
+        <item name="android:background">@drawable/dra_btn_yellow</item>
+    </style>
+    <style name="ButtonStyle.bg_green">
+        <item name="android:background">@drawable/dra_btn_green</item>
+    </style>
+    <style name="ButtonStyle.bg_purple">
+        <item name="android:background">@drawable/dra_btn_purple</item>
+    </style>
+
+    <!--Button 需全局设置-->
+    <style name="ButtonWave" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorButtonNormal" > @color/androidbluel</item>
+        <item name="colorControlHighlight">@color/androidblack</item>
+    </style>
+
+    <!--TextView-->
+    <style name="TextView" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/androidblack</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:typeface">monospace</item>
+    </style>
+
 </resources>
