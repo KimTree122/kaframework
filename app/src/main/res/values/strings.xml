@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KAFramework</string>
+    <string name="WelcomeWord">欢迎进入基础框架</string>
+    <string name="MainTable">主界面</string>
 </resources>
