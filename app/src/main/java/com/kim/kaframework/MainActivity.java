@@ -11,12 +11,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import com.kim.kaframework.Adapter.ListViewCommonAdapter;
+import com.kim.kaframework.Adapter.ListViewHolder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private ListView listView;
+    private ListViewCommonAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +39,16 @@ public class MainActivity extends AppCompatActivity {
     private void findViews() {
         toolbar = (Toolbar) findViewById(R.id.toolbar_main_comment);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
+        listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
+        List<String> strings = new ArrayList<>(Arrays.asList("Hello","World","KIM"));
+
+        listView.setAdapter(adapter = new ListViewCommonAdapter<String>(this,strings,R.layout.item_lv_test) {
+            @Override
+            public void convert(ListViewHolder holder, String item) {
+                holder.setText(R.id.item_lv_text,item);
+            }
+        });
 
 
         toolbar.setTitle("Toolbar");//设置Toolbar标题
