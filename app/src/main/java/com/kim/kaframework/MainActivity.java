@@ -1,20 +1,22 @@
 package com.kim.kaframework;
 
 import android.graphics.Color;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.ButtonBarLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
+import com.kim.kaframework.UIpackage.Fragment.MainLayout;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter = new ListViewCommonAdapter<String>(this,strings,R.layout.item_lv_test) {
             @Override
             public void convert(ListViewHolder holder, String item) {
-                holder.setText(R.id.item_lv_text,item);
+                holder.setText(R.id.item_lv_text,
+                        item, ContextCompat.getColor(getApplicationContext(),R.color.androidblued));
             }
         });
 
 
         toolbar.setTitle("Toolbar");//设置Toolbar标题
-        toolbar.setTitleTextColor(Color.parseColor("#FFFFFF")); //设置标题颜色
+        toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),R.color.white)); //设置标题颜色
 //        toolbar.setScrollBarStyle();
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
@@ -83,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        MainLayout mainframe = new MainLayout();
+        transaction.replace(R.id.drawerlayout_frameLayout,mainframe);
+        transaction.commit();
 
     }
 
