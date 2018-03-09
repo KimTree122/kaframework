@@ -12,12 +12,12 @@ import android.widget.TextView;
 import com.nineoldandroids.view.ViewHelper;
 import com.nineoldandroids.view.ViewPropertyAnimator;
 
-public class RecyclerCommonHolder extends RecyclerView.ViewHolder {
+public class RecyclerViewCommonHolder extends RecyclerView.ViewHolder {
 
     private SparseArray<View> views;
     private Context mcontext;
 
-    public RecyclerCommonHolder(Context context, View itemView) {
+    public RecyclerViewCommonHolder(Context context, View itemView) {
         super(itemView);
         this.mcontext = context;
         views = new SparseArray<>(8);
@@ -29,8 +29,8 @@ public class RecyclerCommonHolder extends RecyclerView.ViewHolder {
      * @param itemView 子项
      * @return 返回一个RecyclerHolder对象
      */
-    public static RecyclerCommonHolder getRecyclerHolder(Context context,View itemView){
-        return new RecyclerCommonHolder(context,itemView);
+    public static RecyclerViewCommonHolder getRecyclerHolder(Context context, View itemView){
+        return new RecyclerViewCommonHolder(context,itemView);
     }
 
     public SparseArray<View> getViews(){
@@ -62,7 +62,7 @@ public class RecyclerCommonHolder extends RecyclerView.ViewHolder {
     /**
      * 设置字符串
      */
-    public RecyclerCommonHolder setText(int viewId,String text){
+    public RecyclerViewCommonHolder setText(int viewId, String text){
         TextView tv = getView(viewId);
         tv.setText(text);
         return this;
@@ -71,7 +71,7 @@ public class RecyclerCommonHolder extends RecyclerView.ViewHolder {
     /**
      * 设置图片
      */
-    public RecyclerCommonHolder setImageResource(int viewId,int drawableId){
+    public RecyclerViewCommonHolder setImageResource(int viewId, int drawableId){
         ImageView iv = getView(viewId);
         iv.setImageResource(drawableId);
         return this;
@@ -80,7 +80,7 @@ public class RecyclerCommonHolder extends RecyclerView.ViewHolder {
     /**
      * 设置图片
      */
-    public RecyclerCommonHolder setImageBitmap(int viewId, Bitmap bitmap){
+    public RecyclerViewCommonHolder setImageBitmap(int viewId, Bitmap bitmap){
         ImageView iv = getView(viewId);
         iv.setImageBitmap(bitmap);
         return this;
@@ -89,7 +89,7 @@ public class RecyclerCommonHolder extends RecyclerView.ViewHolder {
     /**
      * 设置图片
      */
-    public RecyclerCommonHolder setImageByUrl(int viewId,String url){
+    public RecyclerViewCommonHolder setImageByUrl(int viewId, String url){
 //        Picasso.with(context).load(url).into((ImageView) getView(viewId));
         //        ImageLoader.getInstance().init(ImageLoaderConfiguration.createDefault(context));
         //        ImageLoader.getInstance().displayImage(url, (ImageView) getView(viewId));

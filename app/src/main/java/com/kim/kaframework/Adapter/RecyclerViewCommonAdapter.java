@@ -11,7 +11,7 @@ import com.kim.kaframework.R;
 
 import java.util.List;
 
-public abstract class RecyclerViewCommonAdapter<T> extends RecyclerView.Adapter<RecyclerCommonHolder> {
+public abstract class RecyclerViewCommonAdapter<T> extends RecyclerView.Adapter<RecyclerViewCommonHolder> {
     private Context context;//上下文
     private List<T> list;//数据源
     private LayoutInflater inflater;//布局器
@@ -74,13 +74,13 @@ public abstract class RecyclerViewCommonAdapter<T> extends RecyclerView.Adapter<
     }
 
     @Override
-    public RecyclerCommonHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerViewCommonHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(itemLayoutId, parent, false);
-        return RecyclerCommonHolder.getRecyclerHolder(context, view);
+        return RecyclerViewCommonHolder.getRecyclerHolder(context, view);
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerCommonHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerViewCommonHolder holder, int position) {
 
         if (listener != null){
             holder.itemView.setBackgroundResource(R.drawable.recycler_bg);//设置背景
@@ -133,5 +133,5 @@ public abstract class RecyclerViewCommonAdapter<T> extends RecyclerView.Adapter<
      * @param position    位置
      * @param isScrolling 是否在滑动
      */
-    public abstract void convert(RecyclerCommonHolder holder, T item, int position, boolean isScrolling);
+    public abstract void convert(RecyclerViewCommonHolder holder, T item, int position, boolean isScrolling);
 }

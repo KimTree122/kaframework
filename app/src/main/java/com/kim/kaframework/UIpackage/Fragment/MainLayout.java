@@ -1,24 +1,18 @@
 package com.kim.kaframework.UIpackage.Fragment;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ListView;
 
-import com.kim.kaframework.Adapter.ListViewCommonAdapter;
-import com.kim.kaframework.Adapter.ListViewHolder;
-import com.kim.kaframework.Adapter.RecyclerCommonHolder;
+import com.kim.kaframework.Adapter.RecyclerViewCommonHolder;
 import com.kim.kaframework.Adapter.RecyclerViewCommonAdapter;
 import com.kim.kaframework.R;
-import com.kim.kaframework.UIpackage.Activity.ActivitySettings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,7 +45,7 @@ public class MainLayout extends Fragment implements View.OnClickListener {
 
         adapter = new RecyclerViewCommonAdapter<String>(getContext(),strings,R.layout.item_lv_test) {
             @Override
-            public void convert(RecyclerCommonHolder holder, String item, int position, boolean isScrolling) {
+            public void convert(RecyclerViewCommonHolder holder, String item, int position, boolean isScrolling) {
                 holder.setText(R.id.item_lv_text,item);
             }
         };
