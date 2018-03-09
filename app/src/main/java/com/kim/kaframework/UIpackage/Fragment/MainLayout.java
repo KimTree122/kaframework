@@ -1,16 +1,31 @@
 package com.kim.kaframework.UIpackage.Fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ListView;
 
+import com.kim.kaframework.Adapter.ListViewCommonAdapter;
+import com.kim.kaframework.Adapter.ListViewHolder;
 import com.kim.kaframework.R;
+import com.kim.kaframework.UIpackage.Activity.ActivitySettings;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
-public class MainLayout extends Fragment {
+public class MainLayout extends Fragment implements View.OnClickListener {
+
+    private Button main_btn;
+    private ListView frame_main_lv;
+    private ListViewCommonAdapter<String> mainadapter;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +34,33 @@ public class MainLayout extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main,container, false);
+        View view = inflater.inflate(R.layout.fragment_main,container, false);
+//        main_btn = (Button)view.findViewById(R.id.main_btn);
+        frame_main_lv = (ListView)view.findViewById(R.id.frame_main_lv);
+//        main_btn.setOnClickListener(this);
+
+        List<String> strings = new ArrayList<>(Arrays.asList("宋江", "卢俊义", "吴用",
+                "公孙胜", "关胜", "林冲", "秦明", "呼延灼", "花荣", "柴进", "李应", "朱仝", "鲁智深",
+                "武松", "董平", "张清", "杨志", "徐宁", "索超", "戴宗", "刘唐", "李逵", "史进", "穆弘",
+                "雷横", "李俊", "阮小二", "张横", "阮小五", " 张顺", "阮小七", "杨雄", "石秀", "解珍"));
+
+        frame_main_lv.setAdapter(mainadapter = new ListViewCommonAdapter<String>(getContext(),strings,R.layout.item_lv_test2) {
+            @Override
+            public void convert(ListViewHolder holder, String item) {
+                holder.setText(R.id.item_lv_text2,
+                        item, ContextCompat.getColor(getContext(),R.color.androidblued));
+            }
+        });
+        return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+//            case R.id.main_btn:
+//                Intent i = new Intent(getContext(), ActivitySettings.class);
+//                startActivity(i);
+//                break;
+        }
     }
 }

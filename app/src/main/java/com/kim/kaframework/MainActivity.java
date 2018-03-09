@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView listView;
+
     private ListViewCommonAdapter<String> adapter;
 
     @Override
@@ -43,7 +44,11 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
         listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
-        List<String> strings = new ArrayList<>(Arrays.asList("Hello","World","KIM"));
+
+        List<String> strings = new ArrayList<>(Arrays.asList("宋江", "卢俊义", "吴用",
+                "公孙胜", "关胜", "林冲", "秦明", "呼延灼", "花荣", "柴进", "李应", "朱仝", "鲁智深",
+                "武松", "董平", "张清", "杨志", "徐宁", "索超", "戴宗", "刘唐", "李逵", "史进", "穆弘",
+                "雷横", "李俊", "阮小二", "张横", "阮小五", " 张顺", "阮小七", "杨雄", "石秀", "解珍"));
 
         listView.setAdapter(adapter = new ListViewCommonAdapter<String>(this,strings,R.layout.item_lv_test) {
             @Override

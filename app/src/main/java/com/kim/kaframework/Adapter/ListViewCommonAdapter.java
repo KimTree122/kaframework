@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.nineoldandroids.view.ViewHelper;
+import com.nineoldandroids.view.ViewPropertyAnimator;
+
 import java.util.List;
 
 /**
@@ -47,7 +50,13 @@ public abstract class ListViewCommonAdapter<T> extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
        final ListViewHolder viewHolder = getViewHolder(view,viewGroup);
         convert(viewHolder,getItem(i));
-        return viewHolder.getmConvertView();
+        View anview = viewHolder.getmConvertView();
+        ViewHelper.setScaleX(anview, 0.5f);
+        ViewHelper.setScaleY(anview, 0.5f);
+        //以属性动画放大
+        ViewPropertyAnimator.animate(anview).scaleX(1).setDuration(350).start();
+        ViewPropertyAnimator.animate(anview).scaleY(1).setDuration(350).start();
+        return anview;
     }
 
     private  ListViewHolder getViewHolder(View view,ViewGroup viewGroup){
