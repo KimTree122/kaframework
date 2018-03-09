@@ -5,6 +5,8 @@ import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,8 @@ import android.widget.ListView;
 
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
+import com.kim.kaframework.Adapter.RecyclerCommonHolder;
+import com.kim.kaframework.Adapter.RecyclerViewCommonAdapter;
 import com.kim.kaframework.R;
 import com.kim.kaframework.UIpackage.Activity.ActivitySettings;
 
@@ -24,8 +28,9 @@ import java.util.List;
 public class MainLayout extends Fragment implements View.OnClickListener {
 
     private Button main_btn;
-    private ListView frame_main_lv;
-    private ListViewCommonAdapter<String> mainadapter;
+    private RecyclerView framelayout_main_rv;
+    private RecyclerViewCommonAdapter<String> adapter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +41,7 @@ public class MainLayout extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main,container, false);
 //        main_btn = (Button)view.findViewById(R.id.main_btn);
-        frame_main_lv = (ListView)view.findViewById(R.id.frame_main_lv);
+        framelayout_main_rv = (RecyclerView)view.findViewById(R.id.framelayout_main_rv);
 //        main_btn.setOnClickListener(this);
 
         List<String> strings = new ArrayList<>(Arrays.asList("宋江", "卢俊义", "吴用",
@@ -44,13 +49,17 @@ public class MainLayout extends Fragment implements View.OnClickListener {
                 "武松", "董平", "张清", "杨志", "徐宁", "索超", "戴宗", "刘唐", "李逵", "史进", "穆弘",
                 "雷横", "李俊", "阮小二", "张横", "阮小五", " 张顺", "阮小七", "杨雄", "石秀", "解珍"));
 
-        frame_main_lv.setAdapter(mainadapter = new ListViewCommonAdapter<String>(getContext(),strings,R.layout.item_lv_test2) {
+        adapter = new RecyclerViewCommonAdapter<String>(getContext(),strings,R.layout.item_lv_test) {
             @Override
-            public void convert(ListViewHolder holder, String item) {
-                holder.setText(R.id.item_lv_text2,
-                        item, ContextCompat.getColor(getContext(),R.color.androidblued));
+            public void convert(RecyclerCommonHolder holder, String item, int position, boolean isScrolling) {
+                holder.setText(R.id.item_lv_text,item);
             }
-        });
+        };
+        framelayout_main_rv.setLayoutManager
+                (new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
+        framelayout_main_rv.setAdapter(adapter);
+
+
         return view;
     }
 
