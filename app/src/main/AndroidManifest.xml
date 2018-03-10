@@ -3,6 +3,9 @@
     package="com.kim.kaframework">
 
     <application
+
+        android:name=".DBService.DBHelper"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,6 +22,7 @@
         <activity
             android:name=".UIpackage.Activity.ActivitySettings"
             android:label="@string/title_activity_settings"></activity>
+        <activity android:name=".UIpackage.Activity.FuntionTest"/>
     </application>
 
 </manifest>

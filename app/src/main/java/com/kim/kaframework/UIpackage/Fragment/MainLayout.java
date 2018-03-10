@@ -1,5 +1,6 @@
 package com.kim.kaframework.UIpackage.Fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,10 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.kim.kaframework.Adapter.RecyclerViewCommonHolder;
 import com.kim.kaframework.Adapter.RecyclerViewCommonAdapter;
 import com.kim.kaframework.R;
+import com.kim.kaframework.UIpackage.Activity.FuntionTest;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,6 +55,13 @@ public class MainLayout extends Fragment implements View.OnClickListener {
         framelayout_main_rv.setLayoutManager
                 (new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
         framelayout_main_rv.setAdapter(adapter);
+        adapter.setOnItemClickListener(new RecyclerViewCommonAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(RecyclerView parent, View view, int position) {
+                startActivity(new Intent(getContext(), FuntionTest.class));
+            }
+        });
+
 
 
         return view;
