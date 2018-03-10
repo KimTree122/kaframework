@@ -3,7 +3,6 @@ package com.kim.kaframework.Model;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
-import org.greenrobot.greendao.annotation.Property;
 
 @Entity
 public class UserInfo {
