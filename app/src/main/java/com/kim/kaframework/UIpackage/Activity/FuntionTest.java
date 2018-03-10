@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.kim.kaframework.sysData;
 import com.kim.kaframework.DBService.DBHelper;
 import com.kim.kaframework.GreenDao.UserInfoDao;
 import com.kim.kaframework.Model.UserInfo;
@@ -57,15 +58,16 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
         }
     }
 
+
     private void Find() {
         List<UserInfo> userInfos = userInfoDao.queryBuilder().where
-                (UserInfoDao.Properties.Id.eq(1)).build().list();
-        Log.e("kim",userInfos.toString());
+                (UserInfoDao.Properties.Id.eq(0)).build().list();
+        Log.e(sysData.TAG,userInfos.toString());
     }
 
     private void Add() {
         int count2 = userInfoDao.loadAll().size();
-        Log.e("kim","总数:"+count2);
+        Log.e(sysData.TAG,"总数:"+count2);
         UserInfo userInfo = new UserInfo();
 //        userInfo.setId(count);
         userInfo.setUName("kim");
@@ -74,9 +76,7 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
 
         List<UserInfo> userInfos = userInfoDao.loadAll();
         for (UserInfo info : userInfos) {
-            Log.e("kim",info.getId()+"--"+ info.getUName());
+            Log.e(sysData.TAG,info.getId()+"--"+ info.getUName());
         }
-
-
     }
 }
