@@ -3,6 +3,7 @@ package com.kim.kaframework.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
@@ -83,6 +84,12 @@ public class RecyclerViewCommonHolder extends RecyclerView.ViewHolder {
     public RecyclerViewCommonHolder setImageBitmap(int viewId, Bitmap bitmap){
         ImageView iv = getView(viewId);
         iv.setImageBitmap(bitmap);
+        return this;
+    }
+
+    public RecyclerViewCommonHolder setDrawable(int viewid, Drawable drawable){
+        ImageView iv = getView(viewid);
+        iv.setImageDrawable(drawable);
         return this;
     }
 

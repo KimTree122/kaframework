@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.ListView;
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
-import com.kim.kaframework.ImageService.PngDictionary;
+import com.kim.kaframework.ImageService.FindDrawable;
 import com.kim.kaframework.Model.PermissionFuntion;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
 import org.greenrobot.eventbus.EventBus;
@@ -23,9 +23,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
         List<PermissionFuntion> funtions = new ArrayList<PermissionFuntion>();
-        final PngDictionary pd = new PngDictionary(getApplicationContext());
+        final FindDrawable pd = new FindDrawable(getApplicationContext());
         funtions = sysData.getFuntions();
 
         listView.setAdapter(adapter = new ListViewCommonAdapter<PermissionFuntion>(this, funtions, R.layout.item_lv_sysico) {

@@ -2,7 +2,6 @@ package com.kim.kaframework;
 
 import com.kim.kaframework.Model.PermissionFuntion;
 import com.kim.kaframework.Model.UserInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,6 @@ public class sysData {
         funtions.add(addnewPF("tools","工具"));
         funtions.add(addnewPF("report","报表"));
         funtions.add(addnewPF("document","文件"));
-        funtions.add(addnewPF("222","文件"));
         return funtions;
     }
 
