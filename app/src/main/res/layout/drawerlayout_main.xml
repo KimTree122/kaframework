@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/white">
+        android:background="@color/cornflowerblue">
         <ListView
             android:id="@+id/drawerLayout_ListView"
             android:layout_width="match_parent"

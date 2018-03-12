@@ -16,12 +16,19 @@
         <Button
             style="@style/ButtonStyle.bg_yellow"
             android:id="@+id/funtiontest_btn_1"
-            android:text="新增"/>
+            android:text="dao新增"/>
         <Button
             style="@style/ButtonStyle.bg_green"
             android:id="@+id/funtiontest_btn_2"
-            android:text="查询"/>
+            android:text="dao查询"/>
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            style="@style/ButtonStyle.bg_purple"
+            android:id="@+id/funtiontest_btn_3"
+            android:text="EventBus发送"/>
+    </LinearLayout>
 
 </LinearLayout>

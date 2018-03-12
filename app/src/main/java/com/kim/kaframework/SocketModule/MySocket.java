@@ -32,21 +32,21 @@ public class MySocket {
      * 接收服务器消息 变量
      */
     // 输入流对象
-    InputStream is;
+    private InputStream is;
 
     // 输入流读取器对象
-    InputStreamReader isr ;
-    BufferedReader br ;
+    private InputStreamReader isr ;
+    private BufferedReader br ;
 
     // 接收服务器发送过来的消息
-    String response;
+    private String response;
 
 
     /**
      * 发送消息到服务器 变量
      */
     // 输出流对象
-    OutputStream outputStream;
+    private OutputStream outputStream;
 
     public MySocket(){
         mThreadPool = Executors.newCachedThreadPool();

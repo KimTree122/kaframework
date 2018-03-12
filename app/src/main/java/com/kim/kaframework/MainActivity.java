@@ -8,18 +8,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
+import com.kim.kaframework.ImageService.PngDictionary;
+import com.kim.kaframework.Model.PermissionFuntion;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView listView;
 
-    private ListViewCommonAdapter<String> adapter;
+    private ListViewCommonAdapter<PermissionFuntion> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,17 +49,15 @@ public class MainActivity extends AppCompatActivity {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
         listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
+        List<PermissionFuntion> funtions = new ArrayList<PermissionFuntion>();
+        final PngDictionary pd = new PngDictionary(getApplicationContext());
+        funtions = sysData.getFuntions();
 
-        List<String> strings = new ArrayList<>(Arrays.asList("宋江", "卢俊义", "吴用",
-                "公孙胜", "关胜", "林冲", "秦明", "呼延灼", "花荣", "柴进", "李应", "朱仝", "鲁智深",
-                "武松", "董平", "张清", "杨志", "徐宁", "索超", "戴宗", "刘唐", "李逵", "史进", "穆弘",
-                "雷横", "李俊", "阮小二", "张横", "阮小五", "张顺", "阮小七", "杨雄", "石秀", "解珍"));
-
-        listView.setAdapter(adapter = new ListViewCommonAdapter<String>(this,strings,R.layout.item_lv_test) {
+        listView.setAdapter(adapter = new ListViewCommonAdapter<PermissionFuntion>(this, funtions, R.layout.item_lv_sysico) {
             @Override
-            public void convert(ListViewHolder holder, String item) {
-                holder.setText(R.id.item_lv_text,
-                        item, ContextCompat.getColor(getApplicationContext(),R.color.androidblued));
+            public void convert(ListViewHolder holder, PermissionFuntion item) {
+                holder.setImage(R.id.item_sysico_iv,pd.getDrawableByStr(item.getPFEName()));
+                holder.setText(R.id.item_sysico_tv,item.getPFCName());
             }
         });
 
@@ -97,6 +101,13 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.drawerlayout_frameLayout,mainframe);
         transaction.commit();
 
+        EventBus.getDefault().register(this);
+
+    }
+
+    @Subscribe(threadMode= ThreadMode.MAIN)
+    public void MessageReviced(MessageEvent messageEvent){
+        Log.e(sysData.TAG,messageEvent.getMessage()+"main");
     }
 
     @Override

@@ -8,13 +8,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.kim.kaframework.MessageEvent;
 import com.kim.kaframework.sysData;
 import com.kim.kaframework.DBService.DBHelper;
 import com.kim.kaframework.GreenDao.UserInfoDao;
 import com.kim.kaframework.Model.UserInfo;
 import com.kim.kaframework.R;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.List;
+import java.util.Objects;
 
 
 public class FuntionTest extends AppCompatActivity implements View.OnClickListener {
@@ -22,6 +28,7 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
     private TextView funtiontest_tv_title;
     private Button funtiontest_btn_1;
     private Button funtiontest_btn_2;
+    private Button funtiontest_btn_3;
     private UserInfoDao userInfoDao;
 
 
@@ -34,8 +41,13 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
     }
 
     private void InitData() {
-
         userInfoDao = DBHelper.getInstances().getDaoSession().getUserInfoDao();
+        EventBus.getDefault().register(this);
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void OnMessageEvent(Objects objects){
+        Log.e(sysData.TAG,objects.toString());
     }
 
     private void InitLayout() {
@@ -44,6 +56,8 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
         funtiontest_btn_1.setOnClickListener(this);
         funtiontest_btn_2 =(Button)findViewById(R.id.funtiontest_btn_2);
         funtiontest_btn_2.setOnClickListener(this);
+        funtiontest_btn_3 =(Button)findViewById(R.id.funtiontest_btn_3);
+        funtiontest_btn_3.setOnClickListener(this);
     }
 
     @Override
@@ -55,9 +69,15 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
             case R.id.funtiontest_btn_2:
                 Find();
                 break;
+            case R.id.funtiontest_btn_3:
+                SendMessage();
+                break;
         }
     }
 
+    private void SendMessage() {
+        EventBus.getDefault().post(new MessageEvent("funtiontest"));
+    }
 
     private void Find() {
         List<UserInfo> userInfos = userInfoDao.queryBuilder().where
@@ -79,4 +99,8 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
             Log.e(sysData.TAG,info.getId()+"--"+ info.getUName());
         }
     }
+
+
+
+
 }

@@ -2,6 +2,7 @@ package com.kim.kaframework.Adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,9 +61,9 @@ public class ListViewHolder {
     }
 
     //设置图像
-    public ListViewHolder setImage(int viewId, Bitmap bm) {
+    public ListViewHolder setImage(int viewId, Drawable dra) {
         ImageView view = getView(viewId);
-        view.setImageBitmap(bm);
+        view.setImageDrawable(dra);
         return this;
     }
 
