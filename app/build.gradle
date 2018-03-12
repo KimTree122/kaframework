@@ -43,4 +43,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile files('libs/nineoldandroids-2.4.0.jar')
     compile 'org.greenrobot:greendao:3.2.2' // add library
+    compile project(path: ':kfbll')
 }

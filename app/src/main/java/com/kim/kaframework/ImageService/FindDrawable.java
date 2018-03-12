@@ -2,9 +2,7 @@ package com.kim.kaframework.ImageService;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 import com.kim.kaframework.R;
-import com.kim.kaframework.sysData;
 
 public class FindDrawable {
 
