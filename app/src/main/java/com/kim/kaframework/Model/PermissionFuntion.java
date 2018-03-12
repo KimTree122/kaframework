@@ -1,12 +1,27 @@
 package com.kim.kaframework.Model;
 
-/**
- * Created by xf106918 on 2018-03-12.
- */
-
 public class PermissionFuntion {
+
+    private int PFID;
+    private int FID;
     private String PFEName;
     private String PFCName;
+
+    public int getFID() {
+        return FID;
+    }
+
+    public void setFID(int FID) {
+        this.FID = FID;
+    }
+
+    public int getPFID() {
+        return PFID;
+    }
+
+    public void setPFID(int PFID) {
+        this.PFID = PFID;
+    }
 
     public String getPFEName() {
         return PFEName;

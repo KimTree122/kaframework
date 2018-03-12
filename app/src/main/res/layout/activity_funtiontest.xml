@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            style="@style/TextView"
+            style="@style/TextView20Size"
             android:id="@+id/funtiontest_tv_title"
             android:text="显示"/>
     </LinearLayout>

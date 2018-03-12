@@ -14,7 +14,7 @@
             android:src = "@drawable/document"/>
         <TextView
             android:layout_marginStart="30sp"
-            style="@style/TextView"
+            style="@style/TextView20Size"
             android:id="@+id/item_sysico_tv"/>
     </LinearLayout>
 </LinearLayout>

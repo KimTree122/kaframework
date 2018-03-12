@@ -22,7 +22,7 @@
                 android:id="@+id/item_funtion_iv"
                 android:src="@drawable/system"/>
             <TextView
-                style="@style/TextView"
+                style="@style/TextView20Size"
                 android:id="@+id/item_funtion_tv"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
