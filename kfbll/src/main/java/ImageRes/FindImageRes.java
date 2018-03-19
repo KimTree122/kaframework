@@ -1,14 +1,18 @@
-package com.kim.kaframework.ImageService;
+package ImageRes;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import com.kim.kaframework.R;
 
-public class FindDrawable {
+import com.kim.kfbll.R;
 
+/**
+ * Created by xf106918 on 2018-03-16.
+ */
+
+public class FindImageRes {
     private Context mcontext;
 
-    public FindDrawable(Context context){
+    public FindImageRes(Context context){
         mcontext = context;
     }
 
@@ -18,7 +22,7 @@ public class FindDrawable {
         try {
             return   mcontext.getDrawable(resID);
         }catch (Exception e){
-            return  mcontext.getDrawable(R.drawable.system);
+            return  mcontext.getDrawable(R.drawable.application);
         }
     }
 }

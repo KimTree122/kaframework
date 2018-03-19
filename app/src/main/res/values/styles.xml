@@ -58,6 +58,14 @@
     </style>
 
     <!--TextView-->
+    <style name="TextView30Size" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:textColor">@color/androidblack</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <!--<item name="android:typeface">monospace</item>-->
+    </style>
+
     <style name="TextView20Size" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:textColor">@color/androidblack</item>
         <item name="android:textSize">20sp</item>

@@ -8,13 +8,13 @@
         android:gravity= "center_vertical">
         <ImageView
             android:layout_marginStart="30sp"
-            android:layout_width="50sp"
-            android:layout_height="50sp"
+            android:layout_width="60sp"
+            android:layout_height="60sp"
             android:id="@+id/item_sysico_iv"
             android:src = "@drawable/document"/>
         <TextView
             android:layout_marginStart="30sp"
-            style="@style/TextView20Size"
+            style="@style/TextView30Size"
             android:id="@+id/item_sysico_tv"/>
     </LinearLayout>
 </LinearLayout>

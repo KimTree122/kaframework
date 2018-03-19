@@ -7,15 +7,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
-import com.kim.kaframework.ImageService.FindDrawable;
 import com.kim.kaframework.Model.PermissionFuntion;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
 import org.greenrobot.eventbus.EventBus;
@@ -25,7 +28,9 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+import ImageRes.FindImageRes;
+
+public class MainActivity extends AppCompatActivity  {
 
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
@@ -48,14 +53,24 @@ public class MainActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
         List<PermissionFuntion> funtions = new ArrayList<PermissionFuntion>();
-        final FindDrawable pd = new FindDrawable(getApplicationContext());
-        funtions = sysData.getFuntions();
+
+        final FindImageRes fir = new FindImageRes(getApplicationContext());
+        funtions = sysData.getPremession();
 
         listView.setAdapter(adapter = new ListViewCommonAdapter<PermissionFuntion>(this, funtions, R.layout.item_lv_sysico) {
             @Override
             public void convert(ListViewHolder holder, PermissionFuntion item) {
-                holder.setImage(R.id.item_sysico_iv,pd.getDrawableByStr(item.getPFEName()));
+                holder.setImage(R.id.item_sysico_iv,fir.getDrawableByStr(item.getPFEName()));
                 holder.setText(R.id.item_sysico_tv,item.getPFCName());
+            }
+        });
+
+        final List<PermissionFuntion> finalFuntions1 = funtions;
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(getApplicationContext(), finalFuntions1.get(i).getPFEName(),Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -98,6 +113,14 @@ public class MainActivity extends AppCompatActivity {
         MainLayout mainframe = new MainLayout();
         transaction.replace(R.id.drawerlayout_frameLayout,mainframe);
         transaction.commit();
+
+        final List<PermissionFuntion> finalFuntions = funtions;
+        mainframe.OnRcItemClick(new MainLayout.RcItemClick() {
+            @Override
+            public void OpenActivity(int positon) {
+                Toast.makeText(getApplicationContext(), finalFuntions.get(positon).getPFCName(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         EventBus.getDefault().register(this);
 

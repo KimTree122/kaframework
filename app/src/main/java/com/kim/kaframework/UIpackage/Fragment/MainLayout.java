@@ -9,18 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import com.kim.kaframework.Adapter.RecyclerViewCommonHolder;
 import com.kim.kaframework.Adapter.RecyclerViewCommonAdapter;
-import com.kim.kaframework.ImageService.FindDrawable;
 import com.kim.kaframework.Model.PermissionFuntion;
 import com.kim.kaframework.R;
-import com.kim.kaframework.UIpackage.Activity.FuntionTest;
 import com.kim.kaframework.sysData;
 import java.util.List;
+import ImageRes.FindImageRes;
 
 
-public class MainLayout extends Fragment implements View.OnClickListener {
+public class MainLayout extends Fragment {
 
     private RecyclerView framelayout_main_rv;
     private RecyclerViewCommonAdapter<PermissionFuntion> adapter;
@@ -38,13 +36,13 @@ public class MainLayout extends Fragment implements View.OnClickListener {
         framelayout_main_rv = (RecyclerView)view.findViewById(R.id.framelayout_main_rv);
 //        main_btn.setOnClickListener(this);
 
-        final FindDrawable fd = new FindDrawable(getContext());
+        final FindImageRes fir = new FindImageRes(getContext());
 
-        List<PermissionFuntion> funtions = sysData.getFuntions();
+        List<PermissionFuntion> funtions = sysData.getPremession();
         adapter = new RecyclerViewCommonAdapter<PermissionFuntion>(getContext(),funtions,R.layout.item_rv_funtionico) {
             @Override
             public void convert(RecyclerViewCommonHolder holder, PermissionFuntion item, int position, boolean isScrolling) {
-                holder.setDrawable(R.id.item_funtion_iv,fd.getDrawableByStr(item.getPFEName()));
+                holder.setDrawable(R.id.item_funtion_iv,fir.getDrawableByStr(item.getPFEName()));
                 holder.setText(R.id.item_funtion_tv,item.getPFCName());
             }
         };
@@ -55,20 +53,22 @@ public class MainLayout extends Fragment implements View.OnClickListener {
         adapter.setOnItemClickListener(new RecyclerViewCommonAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position) {
-                startActivity(new Intent(getContext(), FuntionTest.class));
+                if (rcItemClick != null){
+                    rcItemClick.OpenActivity(position);
+                }
             }
         });
 
         return view;
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-//            case R.id.main_btn:
-//                Intent i = new Intent(getContext(), ActivitySettings.class);
-//                startActivity(i);
-//                break;
-        }
+
+    public interface RcItemClick {
+        void OpenActivity(int position);
     }
+
+    public RcItemClick rcItemClick;
+
+    public void OnRcItemClick(RcItemClick click){ rcItemClick = click;}
+
 }
