@@ -12,7 +12,8 @@ public class DBHelper  extends Application{
     private DaoSession mDaoSession;
     public static DBHelper instances;
 
-    @Override    public void onCreate() {
+    @Override
+    public void onCreate() {
         super.onCreate();
         instances = this;
         setDatabase();

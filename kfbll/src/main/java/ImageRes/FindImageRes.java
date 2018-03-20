@@ -2,12 +2,7 @@ package ImageRes;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-
 import com.kim.kfbll.R;
-
-/**
- * Created by xf106918 on 2018-03-16.
- */
 
 public class FindImageRes {
     private Context mcontext;

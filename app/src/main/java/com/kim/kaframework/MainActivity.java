@@ -52,10 +52,9 @@ public class MainActivity extends AppCompatActivity  {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
         listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
-        List<PermissionFuntion> funtions = new ArrayList<PermissionFuntion>();
+        final List<PermissionFuntion> funtions = sysData.getPremession();
 
         final FindImageRes fir = new FindImageRes(getApplicationContext());
-        funtions = sysData.getPremession();
 
         listView.setAdapter(adapter = new ListViewCommonAdapter<PermissionFuntion>(this, funtions, R.layout.item_lv_sysico) {
             @Override
@@ -65,24 +64,19 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-        final List<PermissionFuntion> finalFuntions1 = funtions;
+        final List<PermissionFuntion> finalFuntions = funtions;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), finalFuntions1.get(i).getPFEName(),Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), finalFuntions.get(i).getPFEName(),Toast.LENGTH_SHORT).show();
             }
         });
 
 
         toolbar.setTitle("Toolbar");//设置Toolbar标题
         toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),R.color.white)); //设置标题颜色
-//        toolbar.setScrollBarStyle();
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true); //设置返回键可用
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setPopupTheme(R.style.ToolbarPopupTheme);
-
         mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,R.string.close){
             @Override
             public void onDrawerOpened(View drawerView) {
@@ -94,10 +88,8 @@ public class MainActivity extends AppCompatActivity  {
                 super.onDrawerClosed(drawerView);
             }
         };
-
         mDrawerToggle.syncState();
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
@@ -114,7 +106,6 @@ public class MainActivity extends AppCompatActivity  {
         transaction.replace(R.id.drawerlayout_frameLayout,mainframe);
         transaction.commit();
 
-        final List<PermissionFuntion> finalFuntions = funtions;
         mainframe.OnRcItemClick(new MainLayout.RcItemClick() {
             @Override
             public void OpenActivity(int positon) {
@@ -122,11 +113,11 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);//注册EvenBus时间
 
     }
 
-    @Subscribe(threadMode= ThreadMode.MAIN)
+    @Subscribe(threadMode= ThreadMode.MAIN)//接收EvenBus信息
     public void MessageReviced(MessageEvent messageEvent){
         Log.e(sysData.TAG,messageEvent.getMessage()+"main");
     }
