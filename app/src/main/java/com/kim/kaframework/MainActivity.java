@@ -1,5 +1,6 @@
 package com.kim.kaframework;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -7,7 +8,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -17,15 +17,18 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
-import com.kim.kaframework.Model.PermissionFuntion;
+import com.kim.kaframework.UIpackage.Activity.FuntionTest;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
+import com.kim.kfdao.Model.PermissionFuntion;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import ImageRes.FindImageRes;
@@ -64,11 +67,16 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+
+
         final List<PermissionFuntion> finalFuntions = funtions;
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), finalFuntions.get(i).getPFEName(),Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(getApplicationContext(), FuntionTest.class));
+
             }
         });
 

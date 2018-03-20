@@ -1,13 +1,12 @@
-package com.kim.kaframework.DBService;
+package com.kim.kfdao.DBService;
+
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;
+import com.kim.kfdao.GreenDao.DaoMaster;
+import com.kim.kfdao.GreenDao.DaoSession;
 
-import com.kim.kaframework.GreenDao.DaoMaster;
-import com.kim.kaframework.GreenDao.DaoSession;
-
-
-public class DBHelper  extends Application{
+public class DBHelper extends Application {
     private SQLiteDatabase db;
     private DaoSession mDaoSession;
     public static DBHelper instances;
@@ -35,5 +34,4 @@ public class DBHelper  extends Application{
     public SQLiteDatabase getDb() {
         return db;
     }
-
 }

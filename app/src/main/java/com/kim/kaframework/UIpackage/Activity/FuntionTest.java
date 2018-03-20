@@ -10,16 +10,12 @@ import android.widget.TextView;
 
 import com.kim.kaframework.MessageEvent;
 import com.kim.kaframework.sysData;
-import com.kim.kaframework.DBService.DBHelper;
-import com.kim.kaframework.GreenDao.UserInfoDao;
-import com.kim.kaframework.Model.UserInfo;
 import com.kim.kaframework.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.util.List;
 import java.util.Objects;
 
 
@@ -29,7 +25,6 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
     private Button funtiontest_btn_1;
     private Button funtiontest_btn_2;
     private Button funtiontest_btn_3;
-    private UserInfoDao userInfoDao;
 
 
     @Override
@@ -41,7 +36,7 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
     }
 
     private void InitData() {
-        userInfoDao = DBHelper.getInstances().getDaoSession().getUserInfoDao();
+//        userInfoDao = DBHelper.getInstances().getDaoSession().getUserInfoDao();
         EventBus.getDefault().register(this);
     }
 
@@ -80,24 +75,26 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
     }
 
     private void Find() {
-        List<UserInfo> userInfos = userInfoDao.queryBuilder().where
-                (UserInfoDao.Properties.Id.eq(0)).build().list();
-        Log.e(sysData.TAG,userInfos.toString());
+//        List<UserInfo> userInfos = userInfoDao.queryBuilder().where
+//                (UserInfoDao.Properties.Id.eq(0)).build().list();
+//        Log.e(sysData.TAG,userInfos.toString());
+
     }
 
     private void Add() {
-        int count2 = userInfoDao.loadAll().size();
-        Log.e(sysData.TAG,"总数:"+count2);
-        UserInfo userInfo = new UserInfo();
-//        userInfo.setId(count);
-        userInfo.setUName("kim");
-        userInfo.setUPost("kree");
-        userInfoDao.insert(userInfo);
+//        int count2 = userInfoDao.loadAll().size();
+//        Log.e(sysData.TAG,"总数:"+count2);
+//        UserInfo userInfo = new UserInfo();
+//        userInfo.setUName("kim");
+//        userInfo.setUPost("kree");
+//        userInfoDao.insert(userInfo);
+//
+//        List<UserInfo> userInfos = userInfoDao.loadAll();
+//        for (UserInfo info : userInfos) {
+//            Log.e(sysData.TAG,info.getId()+"--"+ info.getUName());
+//        }
 
-        List<UserInfo> userInfos = userInfoDao.loadAll();
-        for (UserInfo info : userInfos) {
-            Log.e(sysData.TAG,info.getId()+"--"+ info.getUName());
-        }
+
     }
 
 

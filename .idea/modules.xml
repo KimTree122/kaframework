@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/kaframework.iml" filepath="$PROJECT_DIR$/kaframework.iml" />
       <module fileurl="file://$PROJECT_DIR$/kfbll/kfbll.iml" filepath="$PROJECT_DIR$/kfbll/kfbll.iml" />
+      <module fileurl="file://$PROJECT_DIR$/kfdao/kfdao.iml" filepath="$PROJECT_DIR$/kfdao/kfdao.iml" />
     </modules>
   </component>
 </project>

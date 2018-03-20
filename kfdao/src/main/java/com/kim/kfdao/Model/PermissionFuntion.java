@@ -1,4 +1,4 @@
-package com.kim.kaframework.Model;
+package com.kim.kfdao.Model;
 
 public class PermissionFuntion {
 
@@ -9,20 +9,20 @@ public class PermissionFuntion {
     private String PFCName;
     private String LayoutName;
 
-    public int getFID() {
-        return FID;
-    }
-
-    public void setFID(int FID) {
-        this.FID = FID;
-    }
-
     public int getID() {
         return ID;
     }
 
     public void setID(int ID) {
         this.ID = ID;
+    }
+
+    public int getFID() {
+        return FID;
+    }
+
+    public void setFID(int FID) {
+        this.FID = FID;
     }
 
     public int getPorF() {

@@ -1,7 +1,9 @@
 package com.kim.kaframework;
 
-import com.kim.kaframework.Model.PermissionFuntion;
-import com.kim.kaframework.Model.UserInfo;
+
+import com.kim.kfdao.Model.PermissionFuntion;
+import com.kim.kfdao.Model.UserInfo;
+
 import java.util.ArrayList;
 import java.util.List;
 

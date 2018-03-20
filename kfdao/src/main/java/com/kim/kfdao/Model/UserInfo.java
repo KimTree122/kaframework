@@ -1,4 +1,4 @@
-package com.kim.kaframework.Model;
+package com.kim.kfdao.Model;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
@@ -6,6 +6,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class UserInfo {
+
     @Id(autoincrement = true)
     private Long id;
     private String UName;
@@ -36,14 +37,5 @@ public class UserInfo {
     }
     public void setUPost(String UPost) {
         this.UPost = UPost;
-    }
-
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "id=" + id +
-                ", UName='" + UName + '\'' +
-                ", UPost='" + UPost + '\'' +
-                '}';
     }
 }

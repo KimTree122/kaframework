@@ -1,1 +1,1 @@
-include ':app', ':kfbll'
+include ':app', ':kfbll', ':kfdao'

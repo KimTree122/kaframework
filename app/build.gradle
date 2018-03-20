@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 26
@@ -17,12 +16,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-    }
-
-    greendao {
-        schemaVersion 1
-        daoPackage 'com.kim.kaframework.GreenDao'
-        targetGenDir 'src/main/java'
     }
 }
 
@@ -42,6 +35,6 @@ dependencies {
     compile 'org.greenrobot:eventbus:3.1.1'
     testCompile 'junit:junit:4.12'
     compile files('libs/nineoldandroids-2.4.0.jar')
-    compile 'org.greenrobot:greendao:3.2.2' // add library
     compile project(path: ':kfbll')
+    compile project(path: ':kfdao')
 }

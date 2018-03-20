@@ -1,4 +1,4 @@
-package com.kim.kaframework.GreenDao;
+package com.kim.kfdao.GreenDao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

@@ -11,9 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.kim.kaframework.Adapter.RecyclerViewCommonHolder;
 import com.kim.kaframework.Adapter.RecyclerViewCommonAdapter;
-import com.kim.kaframework.Model.PermissionFuntion;
+
 import com.kim.kaframework.R;
 import com.kim.kaframework.sysData;
+import com.kim.kfdao.Model.PermissionFuntion;
+
 import java.util.List;
 import ImageRes.FindImageRes;
 
