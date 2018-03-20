@@ -4,10 +4,20 @@ public class PermissionFuntion {
 
     private int ID;
     private int FID;
-    private int PorF;
     private String PFEName;
     private String PFCName;
     private String LayoutName;
+
+    public PermissionFuntion(){}
+
+    public PermissionFuntion (PermissionFuntion p){
+        PermissionFuntion pf = new PermissionFuntion();
+        pf.setFID(p.getFID());
+        pf.setID(p.getID());
+        pf.setPFCName(p.getPFCName());
+        pf.setPFEName(p.getPFEName());
+        pf.setLayoutName(p.getLayoutName());
+    }
 
     public int getID() {
         return ID;
@@ -23,14 +33,6 @@ public class PermissionFuntion {
 
     public void setFID(int FID) {
         this.FID = FID;
-    }
-
-    public int getPorF() {
-        return PorF;
-    }
-
-    public void setPorF(int porF) {
-        PorF = porF;
     }
 
     public String getPFEName() {

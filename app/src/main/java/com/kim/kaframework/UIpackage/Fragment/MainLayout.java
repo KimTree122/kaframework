@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import com.kim.kaframework.sysData;
 import com.kim.kfdao.Model.PermissionFuntion;
 
 import java.util.List;
+
+import Common.PermissionFuntionServer;
 import ImageRes.FindImageRes;
 
 
@@ -24,10 +27,13 @@ public class MainLayout extends Fragment {
 
     private RecyclerView framelayout_main_rv;
     private RecyclerViewCommonAdapter<PermissionFuntion> adapter;
+    private PermissionFuntionServer pfs;
+    private List<PermissionFuntion> funtions;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Nullable
@@ -40,7 +46,10 @@ public class MainLayout extends Fragment {
 
         final FindImageRes fir = new FindImageRes(getContext());
 
-        List<PermissionFuntion> funtions = sysData.getPremession();
+        funtions = sysData.getPremession();
+
+        pfs = new PermissionFuntionServer(funtions);
+
         adapter = new RecyclerViewCommonAdapter<PermissionFuntion>(getContext(),funtions,R.layout.item_rv_funtionico) {
             @Override
             public void convert(RecyclerViewCommonHolder holder, PermissionFuntion item, int position, boolean isScrolling) {
@@ -62,6 +71,21 @@ public class MainLayout extends Fragment {
         });
 
         return view;
+    }
+
+    public void  Refresh(int fid){
+
+
+        List<PermissionFuntion> funtionList = pfs.FilterPermissionFuntion(fid);
+
+        funtions.clear();
+        funtions.addAll(funtionList);
+
+        Log.e(sysData.TAG,funtions.size()+"总数");
+
+        adapter.notifyDataSetChanged();
+
+
     }
 
 

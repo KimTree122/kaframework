@@ -31,6 +31,7 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 
+import Common.PermissionFuntionServer;
 import ImageRes.FindImageRes;
 
 public class MainActivity extends AppCompatActivity  {
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity  {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
     private ListView listView;
+    private PermissionFuntionServer pfs;
 
     private ListViewCommonAdapter<PermissionFuntion> adapter;
 
@@ -57,26 +59,17 @@ public class MainActivity extends AppCompatActivity  {
 
         final List<PermissionFuntion> funtions = sysData.getPremession();
 
+        pfs = new PermissionFuntionServer(funtions);
+
+        final List<PermissionFuntion> mainpermission = pfs.FilterPermissionFuntion(0);
+
         final FindImageRes fir = new FindImageRes(getApplicationContext());
 
-        listView.setAdapter(adapter = new ListViewCommonAdapter<PermissionFuntion>(this, funtions, R.layout.item_lv_sysico) {
+        listView.setAdapter(adapter = new ListViewCommonAdapter<PermissionFuntion>(this, mainpermission, R.layout.item_lv_sysico) {
             @Override
             public void convert(ListViewHolder holder, PermissionFuntion item) {
                 holder.setImage(R.id.item_sysico_iv,fir.getDrawableByStr(item.getPFEName()));
                 holder.setText(R.id.item_sysico_tv,item.getPFCName());
-            }
-        });
-
-
-
-        final List<PermissionFuntion> finalFuntions = funtions;
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(), finalFuntions.get(i).getPFEName(),Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(getApplicationContext(), FuntionTest.class));
-
             }
         });
 
@@ -110,14 +103,24 @@ public class MainActivity extends AppCompatActivity  {
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        MainLayout mainframe = new MainLayout();
+        final MainLayout mainframe = new MainLayout();
         transaction.replace(R.id.drawerlayout_frameLayout,mainframe);
         transaction.commit();
+
 
         mainframe.OnRcItemClick(new MainLayout.RcItemClick() {
             @Override
             public void OpenActivity(int positon) {
-                Toast.makeText(getApplicationContext(), finalFuntions.get(positon).getPFCName(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), finalFuntions.get(positon).getPFCName(),Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                mainframe.Refresh(mainpermission.get(i).getID());
+
             }
         });
 

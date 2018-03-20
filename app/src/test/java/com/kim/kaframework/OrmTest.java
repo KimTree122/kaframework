@@ -1,7 +1,11 @@
 package com.kim.kaframework;
 
 
+import android.util.Log;
+
 import org.junit.Test;
+
+import java.net.URLDecoder;
 
 import static junit.framework.Assert.assertEquals;
 
@@ -13,13 +17,12 @@ public class OrmTest {
 
     @Test
     public void testInsert() throws Exception{
-
-
-//        UserInfo userInfo = new UserInfo(0,"kim","tree");
-//        userInfoDao.insert(userInfo);
-//       int count = userInfoDao.loadAll().size();
-        assertEquals(1,1);
+        String str = "app";
+        String strutf8 ="";
+        assertEquals(strutf8, "app");
 
     }
+
+
 
 }

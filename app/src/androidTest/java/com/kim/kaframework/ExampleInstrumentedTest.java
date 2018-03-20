@@ -3,9 +3,12 @@ package com.kim.kaframework;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.net.URLDecoder;
 
 import static org.junit.Assert.*;
 
@@ -22,5 +25,12 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.kim.kaframework", appContext.getPackageName());
+    }
+
+    @Test
+    public void testInsert() throws Exception{
+        String str = "app";
+        String strutf8 = URLDecoder.decode(str,"Unicode");
+        Log.e(sysData.TAG,strutf8);
     }
 }
