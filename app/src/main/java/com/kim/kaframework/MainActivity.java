@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity  {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
         listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
-        final List<PermissionFuntion> funtions = sysData.getPremession();
+        final List<PermissionFuntion> funtions = InitData.getAllpflist();
 
         pfs = new PermissionFuntionServer(funtions);
 
@@ -111,20 +111,19 @@ public class MainActivity extends AppCompatActivity  {
         mainframe.OnRcItemClick(new MainLayout.RcItemClick() {
             @Override
             public void OpenActivity(int positon) {
-//                Toast.makeText(getApplicationContext(), finalFuntions.get(positon).getPFCName(),Toast.LENGTH_SHORT).show();
+
             }
         });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
                 mainframe.Refresh(mainpermission.get(i).getID());
-
+                mDrawerLayout.closeDrawers();
             }
         });
 
-        EventBus.getDefault().register(this);//注册EvenBus时间
+        EventBus.getDefault().register(this);//注册EvenBus事件
 
     }
 

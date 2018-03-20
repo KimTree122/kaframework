@@ -13,6 +13,7 @@ public class sysData {
     public static String TAG = "kim";
     private static UserInfo muserInfo;
     private static List<PermissionFuntion> permissions;
+    private static List<PermissionFuntion> fristFuntion;
 
 
     public static UserInfo getMuserInfo() {
@@ -62,6 +63,12 @@ public class sysData {
         return permissions;
     }
 
+    public static List<PermissionFuntion> getFristFuntion(){
+        if (permissions.size() == 0){
+            permissions = getPremession();
+        }
+        return  fristFuntion;
+    }
 
 
     private static PermissionFuntion addnewPF(String en,String cn,int id,int fid){

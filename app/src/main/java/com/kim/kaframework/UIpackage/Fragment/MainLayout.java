@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.kim.kaframework.Adapter.RecyclerViewCommonHolder;
 import com.kim.kaframework.Adapter.RecyclerViewCommonAdapter;
 
+import com.kim.kaframework.InitData;
 import com.kim.kaframework.R;
 import com.kim.kaframework.sysData;
 import com.kim.kfdao.Model.PermissionFuntion;
@@ -40,15 +41,13 @@ public class MainLayout extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main,container, false);
-//        main_btn = (Button)view.findViewById(R.id.main_btn);
-        framelayout_main_rv = (RecyclerView)view.findViewById(R.id.framelayout_main_rv);
-//        main_btn.setOnClickListener(this);
+        framelayout_main_rv = view.findViewById(R.id.framelayout_main_rv);
 
         final FindImageRes fir = new FindImageRes(getContext());
 
-        funtions = sysData.getPremession();
+        funtions =InitData.getFristpflist() ;
 
-        pfs = new PermissionFuntionServer(funtions);
+        pfs = new PermissionFuntionServer(InitData.getAllpflist());
 
         adapter = new RecyclerViewCommonAdapter<PermissionFuntion>(getContext(),funtions,R.layout.item_rv_funtionico) {
             @Override
@@ -74,10 +73,7 @@ public class MainLayout extends Fragment {
     }
 
     public void  Refresh(int fid){
-
-
         List<PermissionFuntion> funtionList = pfs.FilterPermissionFuntion(fid);
-
         funtions.clear();
         funtions.addAll(funtionList);
 
