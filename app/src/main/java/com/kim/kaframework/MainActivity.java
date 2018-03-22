@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity  {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
         listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
-        final List<PermissionFuntion> funtions = InitData.getAllpflist();
+        List<PermissionFuntion> funtions = InitData.getAllpflist();
 
         pfs = new PermissionFuntionServer(funtions);
 
@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+        MainFagmentShow(1);
 
         toolbar.setTitle("Toolbar");//设置Toolbar标题
         toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),R.color.white)); //设置标题颜色
@@ -151,11 +152,14 @@ public class MainActivity extends AppCompatActivity  {
         String fPaht = getApplicationContext().getPackageName()+"."+frammentName;
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-
-        Fragment fragment = Fragment.instantiate(getApplicationContext(),fPaht);
-        transaction.setCustomAnimations(R.anim.slide_right_in,R.anim.slide_left_out);
-        transaction.replace(R.id.drawerlayout_frameLayout,fragment);
-        transaction.commit();
+        try {
+            Fragment fragment = Fragment.instantiate(getApplicationContext(),fPaht);
+            transaction.setCustomAnimations(R.anim.slide_right_in,R.anim.slide_left_out);
+            transaction.replace(R.id.drawerlayout_frameLayout,fragment);
+            transaction.commit();
+        }catch (Exception e){
+            Toast.makeText(getApplicationContext(),"打开界面出错，请联系管理员",Toast.LENGTH_SHORT).show();
+        }
 
     }
 

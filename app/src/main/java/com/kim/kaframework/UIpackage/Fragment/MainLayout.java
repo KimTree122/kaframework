@@ -44,8 +44,6 @@ public class MainLayout extends Fragment {
 
         final FindImageRes fir = new FindImageRes(getContext());
 
-//        funtions =InitData.getFristpflist() ;
-
         funtions = pfs.FilterPermissionFuntion(Fid);
 
         adapter = new RecyclerViewCommonAdapter<PermissionFuntion>(getContext(),funtions,R.layout.item_rv_funtionico) {
@@ -68,13 +66,6 @@ public class MainLayout extends Fragment {
         });
 
         return view;
-    }
-
-    public void  Refresh(int fid){
-//        List<PermissionFuntion> funtionList = pfs.FilterPermissionFuntion(fid);
-//        funtions.clear();
-//        funtions.addAll(funtionList);
-//        adapter.notifyDataSetChanged();
     }
 
 
