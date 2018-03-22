@@ -5,6 +5,11 @@
 
     <string name="open">开启</string>
     <string name="close">关闭</string>
+    <string name="notfoundclass">打开错误，未找到对应界面。</string>
+
+
+
+
     <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->

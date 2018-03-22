@@ -28,9 +28,20 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
+    public void getpackage() throws Exception{
+        Context context = InstrumentationRegistry.getTargetContext();
+
+        String mypackage = context.getPackageName();
+
+        Log.e(sysData.TAG,mypackage);
+    }
+
+    @Test
     public void testInsert() throws Exception{
         String str = "app";
         String strutf8 = URLDecoder.decode(str,"Unicode");
         Log.e(sysData.TAG,strutf8);
     }
+
+
 }

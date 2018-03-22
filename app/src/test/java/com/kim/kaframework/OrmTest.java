@@ -17,9 +17,9 @@ public class OrmTest {
 
     @Test
     public void testInsert() throws Exception{
-        String str = "app";
-        String strutf8 ="";
-        assertEquals(strutf8, "app");
+
+
+        assertEquals("", "app");
 
     }
 

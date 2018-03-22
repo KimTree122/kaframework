@@ -1,25 +1,19 @@
 package com.kim.kaframework.UIpackage.Fragment;
 
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.kim.kaframework.Adapter.RecyclerViewCommonHolder;
 import com.kim.kaframework.Adapter.RecyclerViewCommonAdapter;
-
 import com.kim.kaframework.InitData;
 import com.kim.kaframework.R;
-import com.kim.kaframework.sysData;
 import com.kim.kfdao.Model.PermissionFuntion;
-
 import java.util.List;
-
 import Common.PermissionFuntionServer;
 import ImageRes.FindImageRes;
 
@@ -29,12 +23,17 @@ public class MainLayout extends Fragment {
     private RecyclerView framelayout_main_rv;
     private RecyclerViewCommonAdapter<PermissionFuntion> adapter;
     private PermissionFuntionServer pfs;
-    private List<PermissionFuntion> funtions;
+    public List<PermissionFuntion> funtions;
+    private int Fid;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Bundle args = getArguments();
+        if (args != null){
+            Fid = args.getInt("fid");
+            pfs = new PermissionFuntionServer(InitData.getAllpflist());
+        }
     }
 
     @Nullable
@@ -45,9 +44,9 @@ public class MainLayout extends Fragment {
 
         final FindImageRes fir = new FindImageRes(getContext());
 
-        funtions =InitData.getFristpflist() ;
+//        funtions =InitData.getFristpflist() ;
 
-        pfs = new PermissionFuntionServer(InitData.getAllpflist());
+        funtions = pfs.FilterPermissionFuntion(Fid);
 
         adapter = new RecyclerViewCommonAdapter<PermissionFuntion>(getContext(),funtions,R.layout.item_rv_funtionico) {
             @Override
@@ -57,14 +56,13 @@ public class MainLayout extends Fragment {
             }
         };
 
-        framelayout_main_rv.setLayoutManager
-                (new GridLayoutManager(getContext(),3));
+        framelayout_main_rv.setLayoutManager(new GridLayoutManager(getContext(),3));
         framelayout_main_rv.setAdapter(adapter);
         adapter.setOnItemClickListener(new RecyclerViewCommonAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(RecyclerView parent, View view, int position) {
                 if (rcItemClick != null){
-                    rcItemClick.OpenActivity(position);
+                    rcItemClick.ItemClick(position);
                 }
             }
         });
@@ -73,20 +71,15 @@ public class MainLayout extends Fragment {
     }
 
     public void  Refresh(int fid){
-        List<PermissionFuntion> funtionList = pfs.FilterPermissionFuntion(fid);
-        funtions.clear();
-        funtions.addAll(funtionList);
-
-        Log.e(sysData.TAG,funtions.size()+"总数");
-
-        adapter.notifyDataSetChanged();
-
-
+//        List<PermissionFuntion> funtionList = pfs.FilterPermissionFuntion(fid);
+//        funtions.clear();
+//        funtions.addAll(funtionList);
+//        adapter.notifyDataSetChanged();
     }
 
 
     public interface RcItemClick {
-        void OpenActivity(int position);
+        void ItemClick(int position);
     }
 
     public RcItemClick rcItemClick;

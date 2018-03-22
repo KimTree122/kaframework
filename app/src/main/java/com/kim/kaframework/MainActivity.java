@@ -1,6 +1,7 @@
 package com.kim.kaframework;
 
 import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
@@ -17,19 +18,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
-import com.kim.kaframework.UIpackage.Activity.FuntionTest;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
 import com.kim.kfdao.Model.PermissionFuntion;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
-
 import java.util.List;
+import java.util.logging.StreamHandler;
 
 import Common.PermissionFuntionServer;
 import ImageRes.FindImageRes;
@@ -49,7 +46,6 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViews();
-
     }
 
     private void findViews() {
@@ -101,24 +97,11 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        final MainLayout mainframe = new MainLayout();
-        transaction.replace(R.id.drawerlayout_frameLayout,mainframe);
-        transaction.commit();
-
-
-        mainframe.OnRcItemClick(new MainLayout.RcItemClick() {
-            @Override
-            public void OpenActivity(int positon) {
-
-            }
-        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mainframe.Refresh(mainpermission.get(i).getID());
+                MainFagmentShow(mainpermission.get(i).getID());
                 mDrawerLayout.closeDrawers();
             }
         });
@@ -126,6 +109,57 @@ public class MainActivity extends AppCompatActivity  {
         EventBus.getDefault().register(this);//注册EvenBus事件
 
     }
+
+    private void  MainFagmentShow(int fid){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        final MainLayout mainframe = new MainLayout();
+
+        Bundle args = new Bundle();
+        args.putInt("fid",fid);
+        mainframe.setArguments(args);
+
+        transaction.replace(R.id.drawerlayout_frameLayout,mainframe);
+        transaction.commit();
+
+        mainframe.OnRcItemClick(new MainLayout.RcItemClick() {
+            @Override
+            public void ItemClick(int position) {
+                 String str = mainframe.funtions.get(position).getLayoutName();
+                OpenFragment(str);
+            }
+        });
+
+    }
+
+
+    private void  OpenLayout(String activityName)  {
+        Class aClass = null;
+        try {
+            String Activity = getApplicationContext().getPackageName()+"."+activityName;
+
+            aClass = Class.forName(Activity);
+        }catch (ClassNotFoundException e){
+            Toast.makeText(getApplicationContext(),
+                    getResources().getString(R.string.notfoundclass),Toast.LENGTH_SHORT).show();
+            return;
+        }
+        startActivity(new Intent(MainActivity.this,aClass));
+    }
+
+    private void OpenFragment(String frammentName) {
+        String fPaht = getApplicationContext().getPackageName()+"."+frammentName;
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+
+        Fragment fragment = Fragment.instantiate(getApplicationContext(),fPaht);
+        transaction.setCustomAnimations(R.anim.slide_right_in,R.anim.slide_left_out);
+        transaction.replace(R.id.drawerlayout_frameLayout,fragment);
+        transaction.commit();
+
+    }
+
+
 
     @Subscribe(threadMode= ThreadMode.MAIN)//接收EvenBus信息
     public void MessageReviced(MessageEvent messageEvent){

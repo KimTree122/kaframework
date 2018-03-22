@@ -54,8 +54,8 @@ public class RecyclerViewCommonHolder extends RecyclerView.ViewHolder {
         ViewHelper.setScaleX(view, 0.5f);
         ViewHelper.setScaleY(view, 0.5f);
         //以属性动画放大
-        ViewPropertyAnimator.animate(view).scaleX(1).setDuration(350).start();
-        ViewPropertyAnimator.animate(view).scaleY(1).setDuration(350).start();
+        ViewPropertyAnimator.animate(view).scaleX(1).setDuration(500).start();
+        ViewPropertyAnimator.animate(view).scaleY(1).setDuration(500).start();
 
         return (T) view;
     }

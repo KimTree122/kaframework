@@ -1,4 +1,4 @@
-package com.kim.kaframework.SocketModule;
+package com.kim.kaframework.UIpackage.SocketModule;
 
 import android.os.Handler;
 import android.os.Message;

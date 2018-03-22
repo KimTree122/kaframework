@@ -49,8 +49,27 @@ public class InitData {
     public static void InitAllPF() {
         allpflist = new ArrayList<>();
         allpflist.add(addnewPF("system","系统",1,0));
-        allpflist.add(addnewPF("schedue","调度",2,1));
-        allpflist.add(addnewPF("daywork","日常工作",3,1));
+
+//        allpflist.add(addnewPF("schedue","调度",2,1));
+        PermissionFuntion pf = new PermissionFuntion();
+        pf.setFID(1);
+        pf.setID(2);
+        pf.setPFEName("schedue");
+        pf.setPFCName("调度");
+        pf.setLayoutName("UIpackage.Activity.FuntionTest");
+        allpflist.add(pf);
+
+//        allpflist.add(addnewPF("daywork","日常工作",3,1));
+
+        PermissionFuntion pf1 = new PermissionFuntion();
+        pf1.setFID(1);
+        pf1.setID(3);
+        pf1.setPFEName("daywork");
+        pf1.setPFCName("日常工作");
+        pf1.setLayoutName("UIpackage.Fragment.TestFragment");
+        allpflist.add(pf1);
+
+
         allpflist.add(addnewPF("hardware","接口",4,1));
         allpflist.add(addnewPF("review","查看",5,1));
         allpflist.add(addnewPF("remark","记录",6,1));
