@@ -20,6 +20,10 @@ import android.widget.Toast;
 
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
+import com.kim.kaframework.UIpackage.DialogShow.CommonDialogFragment;
+import com.kim.kaframework.UIpackage.DialogShow.DialogFragmentHelper;
+import com.kim.kaframework.UIpackage.DialogShow.IDialogResultListener;
+import com.kim.kaframework.UIpackage.Fragment.EditDialogFragment;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
 import com.kim.kfdao.Model.PermissionFuntion;
 import org.greenrobot.eventbus.EventBus;
@@ -31,7 +35,7 @@ import java.util.logging.StreamHandler;
 import Common.PermissionFuntionServer;
 import ImageRes.FindImageRes;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements EditDialogFragment.EditDialogListener {
 
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
@@ -158,12 +162,37 @@ public class MainActivity extends AppCompatActivity  {
             transaction.replace(R.id.drawerlayout_frameLayout,fragment);
             transaction.commit();
         }catch (Exception e){
-            Toast.makeText(getApplicationContext(),"打开界面出错，请联系管理员",Toast.LENGTH_SHORT).show();
+//            EditDialogFragment fragment = new EditDialogFragment();
+//            fragment.setCancelable(false);
+//            fragment.show(getFragmentManager(),"showdialog");
+//            Toast.makeText(getApplicationContext(),"打开界面出错，请联系管理员",Toast.LENGTH_SHORT).show();
+
+            DialogFragmentHelper.showConfirmDialog(getSupportFragmentManager(), "是否选择 Android？", new IDialogResultListener<Integer>() {
+                @Override
+                public void onDataResult(Integer result) {
+                    showToast("You Click Ok");
+                }
+            }, true, new CommonDialogFragment.OnDialogCancelListener() {
+                @Override
+                public void onCancel() {
+                    showToast("You Click Cancel");
+                }
+            });
         }
 
     }
 
 
+
+    private void showToast(String message){
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnEditInputComplete(String username, String password) {
+        Toast.makeText(this, "帐号：" + username + ",  密码 :" + password,
+                Toast.LENGTH_SHORT).show();
+    }
 
     @Subscribe(threadMode= ThreadMode.MAIN)//接收EvenBus信息
     public void MessageReviced(MessageEvent messageEvent){
