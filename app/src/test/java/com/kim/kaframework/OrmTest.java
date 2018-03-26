@@ -6,6 +6,9 @@ import android.util.Log;
 import org.junit.Test;
 
 import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static junit.framework.Assert.assertEquals;
 

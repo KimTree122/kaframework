@@ -16,15 +16,24 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
+import BaseActivity.AbsBaseActivity;
+import HttpHelper.OKhttphelper;
+import okhttp3.Call;
+import okhttp3.Response;
 
-public class FuntionTest extends AppCompatActivity implements View.OnClickListener {
+
+public class FuntionTest extends AbsBaseActivity implements View.OnClickListener {
 
     private TextView funtiontest_tv_title;
     private Button funtiontest_btn_1;
     private Button funtiontest_btn_2;
     private Button funtiontest_btn_3;
+    private Button funtiontest_btn_4;
 
 
     @Override
@@ -53,6 +62,8 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
         funtiontest_btn_2.setOnClickListener(this);
         funtiontest_btn_3 =(Button)findViewById(R.id.funtiontest_btn_3);
         funtiontest_btn_3.setOnClickListener(this);
+        funtiontest_btn_4 =(Button)findViewById(R.id.funtiontest_btn_4);
+        funtiontest_btn_4.setOnClickListener(this);
     }
 
     @Override
@@ -67,7 +78,28 @@ public class FuntionTest extends AppCompatActivity implements View.OnClickListen
             case R.id.funtiontest_btn_3:
                 SendMessage();
                 break;
+            case R.id.funtiontest_btn_4:
+               MyOKhttpTest();
+                break;
         }
+    }
+
+    private void MyOKhttpTest() {
+
+        Log.e(sysData.TAG,"kaishi");
+        Map<String, Object> mapobject = new HashMap<>();
+        HttpPost("http://192.168.61.65:1277/Ntol/NtolData/GetTestData", mapobject, new OKhttphelper.OKcallback() {
+            @Override
+            public void Success(Call call, Response response) throws IOException {
+                Log.e(sysData.TAG,response.body().string());
+            }
+
+            @Override
+            public void Fail(Call call, IOException e) {
+
+            }
+        });
+
     }
 
     private void SendMessage() {

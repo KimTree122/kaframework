@@ -9,6 +9,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -25,6 +28,27 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.kim.kaframework", appContext.getPackageName());
+    }
+
+    @Test
+    public void MapTest()throws Exception{
+
+        HashMap<String,String> map = new HashMap<>();
+        map.put("value1","value1");
+        map.put("value2","value2");
+
+        Iterator kv = map.entrySet().iterator();
+        Iterator k = map.keySet().iterator();
+        Iterator v = map.values().iterator();
+
+        for (int i = 0; i < map.size();i++){
+            Map.Entry entry = (Map.Entry)kv.next();
+            Object key = entry.getKey();
+            Object value = entry.getValue();
+            Log.e(sysData.TAG,key.toString()+"-"+value.toString());
+        }
+
+
     }
 
     @Test

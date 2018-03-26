@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
+import com.kim.kaframework.UIpackage.Activity.FuntionTest;
 import com.kim.kaframework.UIpackage.DialogShow.CommonDialogFragment;
 import com.kim.kaframework.UIpackage.DialogShow.DialogFragmentHelper;
 import com.kim.kaframework.UIpackage.DialogShow.IDialogResultListener;
@@ -167,17 +168,19 @@ public class MainActivity extends AppCompatActivity implements EditDialogFragmen
 //            fragment.show(getFragmentManager(),"showdialog");
 //            Toast.makeText(getApplicationContext(),"打开界面出错，请联系管理员",Toast.LENGTH_SHORT).show();
 
-            DialogFragmentHelper.showConfirmDialog(getSupportFragmentManager(), "是否选择 Android？", new IDialogResultListener<Integer>() {
-                @Override
-                public void onDataResult(Integer result) {
-                    showToast("You Click Ok");
-                }
-            }, true, new CommonDialogFragment.OnDialogCancelListener() {
-                @Override
-                public void onCancel() {
-                    showToast("You Click Cancel");
-                }
-            });
+//            DialogFragmentHelper.showConfirmDialog(getSupportFragmentManager(), "是否选择 Android？", new IDialogResultListener<Integer>() {
+//                @Override
+//                public void onDataResult(Integer result) {
+//                    showToast("You Click Ok");
+//                }
+//            }, true, new CommonDialogFragment.OnDialogCancelListener() {
+//                @Override
+//                public void onCancel() {
+//                    showToast("You Click Cancel");
+//                }
+//            });
+            startActivity(new Intent(this, FuntionTest.class));
+
         }
 
     }
