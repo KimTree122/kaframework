@@ -20,23 +20,18 @@ import android.widget.Toast;
 
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
-import com.kim.kaframework.UIpackage.Activity.FuntionTest;
-import com.kim.kaframework.UIpackage.DialogShow.CommonDialogFragment;
-import com.kim.kaframework.UIpackage.DialogShow.DialogFragmentHelper;
-import com.kim.kaframework.UIpackage.DialogShow.IDialogResultListener;
-import com.kim.kaframework.UIpackage.Fragment.EditDialogFragment;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
 import com.kim.kfdao.Model.PermissionFuntion;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
-import java.util.logging.StreamHandler;
 
 import Common.PermissionFuntionServer;
+import DialogFragment.EditDialog;
 import ImageRes.FindImageRes;
 
-public class MainActivity extends AppCompatActivity implements EditDialogFragment.EditDialogListener {
+public class MainActivity extends AppCompatActivity implements EditDialog.EditDialogListener {
 
     private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
@@ -163,10 +158,12 @@ public class MainActivity extends AppCompatActivity implements EditDialogFragmen
             transaction.replace(R.id.drawerlayout_frameLayout,fragment);
             transaction.commit();
         }catch (Exception e){
-//            EditDialogFragment fragment = new EditDialogFragment();
-//            fragment.setCancelable(false);
-//            fragment.show(getFragmentManager(),"showdialog");
 //            Toast.makeText(getApplicationContext(),"打开界面出错，请联系管理员",Toast.LENGTH_SHORT).show();
+
+            EditDialog f = new EditDialog();
+            f.setCancelable(false);
+            f.show(getFragmentManager(),"show");
+
 
 //            DialogFragmentHelper.showConfirmDialog(getSupportFragmentManager(), "是否选择 Android？", new IDialogResultListener<Integer>() {
 //                @Override
@@ -179,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements EditDialogFragmen
 //                    showToast("You Click Cancel");
 //                }
 //            });
-            startActivity(new Intent(this, FuntionTest.class));
+//            startActivity(new Intent(this, FuntionTest.class));
 
         }
 
