@@ -8,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import java.io.IOException;
 import java.util.Map;
 
+import HttpHelper.BaseCallBack;
 import HttpHelper.MapParam;
 import HttpHelper.OKhttphelper;
+import HttpHelper.SimpleHttpClient;
 import okhttp3.Call;
 import okhttp3.Response;
 

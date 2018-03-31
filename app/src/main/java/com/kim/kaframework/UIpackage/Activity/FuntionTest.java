@@ -1,16 +1,20 @@
 package com.kim.kaframework.UIpackage.Activity;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kim.kaframework.MessageEvent;
 import com.kim.kaframework.sysData;
 import com.kim.kaframework.R;
+import com.kim.kfbll.QRScan.MipcaActivityCapture;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -34,7 +38,10 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
     private Button funtiontest_btn_2;
     private Button funtiontest_btn_3;
     private Button funtiontest_btn_4;
+    private Button funtiontest_btn_5;
+    private ImageView funtiontest_image;
 
+    private final static int SCANNIN_GREQUEST_CODE = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +71,10 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
         funtiontest_btn_3.setOnClickListener(this);
         funtiontest_btn_4 =(Button)findViewById(R.id.funtiontest_btn_4);
         funtiontest_btn_4.setOnClickListener(this);
+        funtiontest_btn_5 =(Button)findViewById(R.id.funtiontest_btn_5);
+        funtiontest_btn_5.setOnClickListener(this);
+
+        funtiontest_image = (ImageView)findViewById(R.id.funtiontest_image);
     }
 
     @Override
@@ -80,6 +91,33 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
                 break;
             case R.id.funtiontest_btn_4:
                MyOKhttpTest();
+                break;
+            case R.id.funtiontest_btn_5:
+               QRScan();
+                break;
+        }
+    }
+
+    private void QRScan() {
+        Intent intent = new Intent();
+        intent.setClass(FuntionTest.this, MipcaActivityCapture.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivityForResult(intent, SCANNIN_GREQUEST_CODE);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+            case SCANNIN_GREQUEST_CODE:
+                if(resultCode == RESULT_OK){
+                    Bundle bundle = data.getExtras();
+                    //显示扫描到的内容
+                    funtiontest_tv_title.setText(bundle.getString("result"));
+                    //显示
+                    funtiontest_image.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
+                }
                 break;
         }
     }

@@ -37,10 +37,7 @@ public class SimpleHttpClient {
 
 
     public void enqueue(BaseCallBack callBack){
-
-
-
-
+         OKHttpManager.getmInstance().request(this,callBack);
     }
 
     public  static Builder newBuilder(){

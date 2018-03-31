@@ -38,5 +38,20 @@
             android:id="@+id/funtiontest_btn_4"
             android:text="HttpPOST"/>
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            style="@style/ButtonStyle.bg_red"
+            android:id="@+id/funtiontest_btn_5"
+            android:text="二维码扫描"/>
+    </LinearLayout>
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/funtiontest_image"/>
+</LinearLayout>
 </LinearLayout>

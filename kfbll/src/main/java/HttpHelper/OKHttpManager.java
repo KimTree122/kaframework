@@ -2,6 +2,7 @@ package HttpHelper;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 
@@ -51,12 +52,12 @@ public class OKHttpManager {
 
         mokHttpClient.newCall(client.builderRequest()).enqueue(new Callback() {
             @Override
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(@NonNull Call call,@NonNull IOException e) {
                 callBack.onFailure(call,e);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.isSuccessful()){
                     String result = response.body().string();
 
@@ -65,8 +66,6 @@ public class OKHttpManager {
                     }else {
                         sendOnSuccessMessage(mgson.fromJson(result,callBack.mType));
                     }
-
-
 
                     if (response.body() != null){
                         response.body().close();

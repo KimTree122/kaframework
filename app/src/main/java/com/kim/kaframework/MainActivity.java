@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
+import com.kim.kaframework.UIpackage.Activity.FuntionTest;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
 import com.kim.kfdao.Model.PermissionFuntion;
 import org.greenrobot.eventbus.EventBus;
@@ -160,9 +161,9 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
         }catch (Exception e){
 //            Toast.makeText(getApplicationContext(),"打开界面出错，请联系管理员",Toast.LENGTH_SHORT).show();
 
-            EditDialog f = new EditDialog();
-            f.setCancelable(false);
-            f.show(getFragmentManager(),"show");
+//            EditDialog f = new EditDialog();
+//            f.setCancelable(false);
+//            f.show(getFragmentManager(),"show");
 
 
 //            DialogFragmentHelper.showConfirmDialog(getSupportFragmentManager(), "是否选择 Android？", new IDialogResultListener<Integer>() {
@@ -176,7 +177,8 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
 //                    showToast("You Click Cancel");
 //                }
 //            });
-//            startActivity(new Intent(this, FuntionTest.class));
+
+            startActivity(new Intent(this, FuntionTest.class));
 
         }
 
