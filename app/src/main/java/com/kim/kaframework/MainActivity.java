@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
 
         MainFagmentShow(1);
 
-        toolbar.setTitle("Toolbar");//设置Toolbar标题
+        toolbar.setTitle("KIMTREE");//设置Toolbar标题
         toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),R.color.white)); //设置标题颜色
         setSupportActionBar(toolbar);
         toolbar.setPopupTheme(R.style.ToolbarPopupTheme);

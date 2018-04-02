@@ -31,7 +31,6 @@ import com.kim.kfbll.QRScan.view.ViewfinderView;
 import com.kim.kfbll.R;
 /**
  * Initial the camera
- * @author Ryan.Tang
  */
 public class MipcaActivityCapture extends Activity implements Callback {
 

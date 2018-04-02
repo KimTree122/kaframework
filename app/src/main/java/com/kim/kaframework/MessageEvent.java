@@ -1,8 +1,5 @@
 package com.kim.kaframework;
 
-/**
- * Created by xf106918 on 2018-03-11.
- */
 
 public class MessageEvent {
     private String message;
