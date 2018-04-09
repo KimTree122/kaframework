@@ -46,6 +46,30 @@
             android:id="@+id/funtiontest_btn_5"
             android:text="二维码扫描"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            style="@style/ButtonStyle.bg_yellow"
+            android:id="@+id/funtiontest_btn_6"
+            android:text="Soc连接"/>
+        <Button
+            style="@style/ButtonStyle.bg_green"
+            android:id="@+id/funtiontest_btn_7"
+            android:text="发送"/>
+        <Button
+            style="@style/ButtonStyle.bg_purple"
+            android:id="@+id/funtiontest_btn_8"
+            android:text="接收"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="70sp"
+            android:id="@+id/funtiontest_et_1"
+            android:hint="发送数据"/>
+    </LinearLayout>
+
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -54,4 +78,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/funtiontest_image"/>
 </LinearLayout>
+
+
 </LinearLayout>

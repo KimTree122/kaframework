@@ -1,30 +1,73 @@
 package BaseActivity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.Toast;
 
-import java.io.IOException;
+import com.kim.kfbll.R;
+
 import java.util.Map;
-
-import HttpHelper.BaseCallBack;
-import HttpHelper.MapParam;
 import HttpHelper.OKhttphelper;
-import HttpHelper.SimpleHttpClient;
-import okhttp3.Call;
-import okhttp3.Response;
 
-public class AbsBaseActivity extends AppCompatActivity {
+public abstract class AbsBaseActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected  void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
     }
 
     public void HttpPost(String url, Map<String, Object> mapParam , OKhttphelper.OKcallback oKcallback){
         OKhttphelper.getInstance().HttpPostData(url, mapParam , oKcallback);
+    }
+
+    protected abstract void InitLayout();
+
+    protected abstract void InitData();
+
+
+    /**  得到字符串資源 **/
+    public String getResStr(int id)
+    {
+        return this.getResources().getString(id);
+    }
+
+    /** 短暂显示Toast提示(来自res) **/
+    protected void showShortToast(int resId) {
+        Toast.makeText(this, getString(resId), Toast.LENGTH_SHORT).show();
+    }
+
+    /** 短暂显示Toast提示(来自String) **/
+    protected void showShortToast(String text) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+    }
+
+    /** Debug输出Log日志 **/
+    protected void showLog(String msg) {
+        Log.e("kim", msg);
+    }
+
+    protected void startActivity(Class<?> cls, Bundle bundle) {
+        Intent intent = new Intent();
+        intent.setClass(this, cls);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        if(intent.resolveActivity(getPackageManager()) != null){
+            startActivity(intent);
+        }else{
+            showLog( "there is no activity can handle this intent: "+intent.getAction().toString());
+        }
+        overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.push_right_in, R.anim.push_right_out);
     }
 
 }

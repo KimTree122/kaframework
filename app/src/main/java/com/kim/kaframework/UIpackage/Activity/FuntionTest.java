@@ -1,13 +1,17 @@
 package com.kim.kaframework.UIpackage.Activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +24,23 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.Socket;
+import java.net.SocketException;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import BaseActivity.AbsBaseActivity;
 import HttpHelper.OKhttphelper;
@@ -39,9 +56,18 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
     private Button funtiontest_btn_3;
     private Button funtiontest_btn_4;
     private Button funtiontest_btn_5;
+    private Button funtiontest_btn_6;
+    private Button funtiontest_btn_7;
+    private Button funtiontest_btn_8;
+
+    private EditText funtiontest_et_1;
+
     private ImageView funtiontest_image;
 
     private final static int SCANNIN_GREQUEST_CODE = 1;
+
+    private Socket socket;
+    private ExecutorService mThreadPool;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,9 +77,10 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
         InitData();
     }
 
-    private void InitData() {
+    protected void InitData() {
 //        userInfoDao = DBHelper.getInstances().getDaoSession().getUserInfoDao();
         EventBus.getDefault().register(this);
+        mThreadPool = Executors.newCachedThreadPool();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -61,7 +88,7 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
         Log.e(sysData.TAG,objects.toString());
     }
 
-    private void InitLayout() {
+    protected void InitLayout() {
         funtiontest_tv_title = (TextView)findViewById(R.id.funtiontest_tv_title);
         funtiontest_btn_1 =(Button)findViewById(R.id.funtiontest_btn_1);
         funtiontest_btn_1.setOnClickListener(this);
@@ -73,6 +100,15 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
         funtiontest_btn_4.setOnClickListener(this);
         funtiontest_btn_5 =(Button)findViewById(R.id.funtiontest_btn_5);
         funtiontest_btn_5.setOnClickListener(this);
+        funtiontest_btn_6 =(Button)findViewById(R.id.funtiontest_btn_6);
+        funtiontest_btn_6.setOnClickListener(this);
+        funtiontest_btn_7 =(Button)findViewById(R.id.funtiontest_btn_7);
+        funtiontest_btn_7.setOnClickListener(this);
+        funtiontest_btn_8 =(Button)findViewById(R.id.funtiontest_btn_8);
+        funtiontest_btn_8.setOnClickListener(this);
+
+
+        funtiontest_et_1 = (EditText)findViewById(R.id.funtiontest_et_1);
 
         funtiontest_image = (ImageView)findViewById(R.id.funtiontest_image);
     }
@@ -95,7 +131,79 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
             case R.id.funtiontest_btn_5:
                QRScan();
                 break;
+            case R.id.funtiontest_btn_6:
+                ConncetSocket();
+                break;
+            case R.id.funtiontest_btn_7:
+                SendSocketMsg();
+                break;
+            case R.id.funtiontest_btn_8:
+                Revieve();
+                break;
         }
+    }
+
+    private void ConncetSocket() {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    socket = new Socket("192.168.61.65",60000);
+                    showLog("连接成功");
+                    if (socket.isConnected()){
+                        Revieve();
+                    }
+                }catch (UnknownHostException e){
+                   e.printStackTrace();
+                }catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
+    }
+
+    private void Revieve(){
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    while (true){
+
+                        InputStream is = socket.getInputStream();
+                        int result = is.available();
+                        if (result == 0)continue;
+                        byte[] data = new  byte[result];
+                        is.read(data);
+                        String content = new String(data,"utf-8");
+                        showLog(content);
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        t.start();
+
+    }
+
+    private void SendSocketMsg() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OutputStream outputStream = socket.getOutputStream();
+                    String msg = funtiontest_et_1.getText().toString();
+                    outputStream.write(msg.getBytes("utf-8"));
+                    outputStream.flush();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
     }
 
     private void QRScan() {
