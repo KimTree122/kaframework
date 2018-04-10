@@ -79,7 +79,6 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
     private final static int SCANNIN_GREQUEST_CODE = 1;
 
     private Socket socket;
-    private ExecutorService mThreadPool;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +91,6 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
     protected void InitData() {
 //        userInfoDao = DBHelper.getInstances().getDaoSession().getUserInfoDao();
         EventBus.getDefault().register(this);
-        mThreadPool = Executors.newCachedThreadPool();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -339,6 +337,10 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
     private void  ServerActivity(){
         Intent i = new Intent(this, SocketServer.class);
         bindService(i,connection,BIND_AUTO_CREATE);
+    }
+
+    private  void PushServer(){
+
     }
 
 }
