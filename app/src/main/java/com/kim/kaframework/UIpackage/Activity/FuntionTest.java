@@ -1,11 +1,14 @@
 package com.kim.kaframework.UIpackage.Activity;
 
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringDef;
@@ -25,6 +28,7 @@ import com.kim.kaframework.MessageEvent;
 import com.kim.kaframework.sysData;
 import com.kim.kaframework.R;
 import com.kim.kfbll.QRScan.MipcaActivityCapture;
+import com.kim.kfbll.Server.SocketServer;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -319,4 +323,22 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
             }
         }
     }
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+
+        }
+    };
+
+    private void  ServerActivity(){
+        Intent i = new Intent(this, SocketServer.class);
+        bindService(i,connection,BIND_AUTO_CREATE);
+    }
+
 }
