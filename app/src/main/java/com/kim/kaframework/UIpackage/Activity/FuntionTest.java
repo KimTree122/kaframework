@@ -169,7 +169,6 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
             public void run() {
                 try {
                     while (true){
-
                         InputStream is = socket.getInputStream();
                         int result = is.available();
                         if (result == 0)continue;
