@@ -14,11 +14,13 @@ import com.kim.kaframework.InitData;
 import com.kim.kaframework.R;
 import com.kim.kfdao.Model.PermissionFuntion;
 import java.util.List;
+
+import BaseFragment.AbsFragment;
 import Common.PermissionFuntionServer;
 import ImageRes.FindImageRes;
 
 
-public class MainLayout extends Fragment {
+public class MainLayout extends AbsFragment {
 
     private RecyclerView framelayout_main_rv;
     private RecyclerViewCommonAdapter<PermissionFuntion> adapter;

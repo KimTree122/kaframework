@@ -8,7 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.kim.kfbll.MessageEvent;
 import com.kim.kfbll.R;
+import com.kim.kfbll.sysData;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Map;
 import HttpHelper.OKhttphelper;
@@ -18,17 +24,25 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
     @Override
     protected  void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        EventBus.getDefault().register(this);
     }
 
     public void HttpPost(String url, Map<String, Object> mapParam , OKhttphelper.OKcallback oKcallback){
         OKhttphelper.getInstance().HttpPostData(url, mapParam , oKcallback);
     }
 
+    @Subscribe(threadMode= ThreadMode.MAIN)//接收EvenBus信息
+    public void MessageReviced(MessageEvent messageEvent){
+        Log.e(sysData.TAG,messageEvent.getMessage()+"main");
+    }
+
     protected abstract void InitLayout();
 
     protected abstract void InitData();
 
+    private void SendMessage() {
+        EventBus.getDefault().post(new MessageEvent("EventBus"));
+    }
 
     /**  得到字符串資源 **/
     public String getResStr(int id)

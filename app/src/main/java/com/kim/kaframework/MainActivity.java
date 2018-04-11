@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
             transaction.replace(R.id.drawerlayout_frameLayout,fragment);
             transaction.commit();
         }catch (Exception e){
-//            Toast.makeText(getApplicationContext(),"打开界面出错，请联系管理员",Toast.LENGTH_SHORT).show();
 
 //            EditDialog f = new EditDialog();
 //            f.setCancelable(false);

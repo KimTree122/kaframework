@@ -17,7 +17,7 @@ public class SocketServer extends Service {
     private boolean run;
     private String ipAddress;
     private int Port;
-    private String setdmsg;
+    private String sendmsg;
 
     @Nullable
     @Override
@@ -97,7 +97,7 @@ public class SocketServer extends Service {
             public void run() {
                 try {
                     OutputStream outputStream = socket.getOutputStream();
-                    String msg = setdmsg;
+                    String msg = sendmsg;
                     outputStream.write(msg.getBytes("utf-8"));
                     outputStream.flush();
 
