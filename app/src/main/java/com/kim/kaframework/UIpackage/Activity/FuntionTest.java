@@ -4,19 +4,15 @@ import android.Manifest;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.util.Xml;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,8 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kim.kaframework.MessageEvent;
-import com.kim.kaframework.sysData;
 import com.kim.kaframework.R;
+import com.kim.kaframework.sysData;
 import com.kim.kfbll.QRScan.MipcaActivityCapture;
 import com.kim.kfbll.Server.SocketServer;
 
@@ -34,30 +30,19 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.Socket;
-import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import BaseActivity.AbsBaseActivity;
-import HttpHelper.OKhttphelper;
-import okhttp3.Call;
-import okhttp3.Response;
 
 import static android.support.v4.content.PermissionChecker.PERMISSION_GRANTED;
+
+//import okhttp3.Call;
+//import okhttp3.Response;
 
 
 public class FuntionTest extends AbsBaseActivity implements View.OnClickListener {
@@ -90,7 +75,7 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
 
     protected void InitData() {
 //        userInfoDao = DBHelper.getInstances().getDaoSession().getUserInfoDao();
-        EventBus.getDefault().register(this);
+//        EventBus.getDefault().register(this);
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -136,7 +121,7 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
                 SendMessage();
                 break;
             case R.id.funtiontest_btn_4:
-               MyOKhttpTest();
+//               MyOKhttpTest();
                 break;
             case R.id.funtiontest_btn_5:
                QRScan();
@@ -239,23 +224,23 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
         }
     }
 
-    private void MyOKhttpTest() {
-
-        Log.e(sysData.TAG,"kaishi");
-        Map<String, Object> mapobject = new HashMap<>();
-        HttpPost("http://192.168.61.65:1277/Ntol/NtolData/GetTestData", mapobject, new OKhttphelper.OKcallback() {
-            @Override
-            public void Success(Call call, Response response) throws IOException {
-                Log.e(sysData.TAG,response.body().string());
-            }
-
-            @Override
-            public void Fail(Call call, IOException e) {
-
-            }
-        });
-
-    }
+//    private void MyOKhttpTest() {
+//
+//        Log.e(sysData.TAG,"kaishi");
+//        Map<String, Object> mapobject = new HashMap<>();
+//        HttpPost("http://192.168.61.65:1277/Ntol/NtolData/GetTestData", mapobject, new OKhttphelper.OKcallback() {
+//            @Override
+//            public void Success(Call call, Response response) throws IOException {
+//                Log.e(sysData.TAG,response.body().string());
+//            }
+//
+//            @Override
+//            public void Fail(Call call, IOException e) {
+//
+//            }
+//        });
+//
+//    }
 
     private void SendMessage() {
         EventBus.getDefault().post(new MessageEvent("funtiontest"));
