@@ -1,6 +1,7 @@
 package BaseActivity;
 
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,14 +18,40 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import Common.CrashHandler;
 import HttpHelper.OKhttphelper;
 
 public abstract class AbsBaseActivity extends AppCompatActivity {
+
+    private PendingIntent restartIntent;
 
     @Override
     protected  void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+
+        CrashHelperInit();
+    }
+
+    //初始化全局崩溃异常代码
+    private void CrashHelperInit() {
+        CrashHandler.CrashUploader crashUploader = new CrashHandler.CrashUploader() {
+            @Override
+            public void uploadCrashMessage(ConcurrentHashMap<String, Object> info) {
+                //信息上传
+            }
+        };
+
+        Intent[] intents = new Intent[1];
+        Intent intent = new Intent();
+        intent.setClassName("com.owen.crashhander","com.kfbll.BaseActivity.main")
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intents[0] = intent;
+
+        restartIntent = PendingIntent.getActivities(getApplicationContext(),0,intents,0);
+        CrashHandler.getInstance().init(this,crashUploader,restartIntent);
     }
 
     public void HttpPost(String url, Map<String, Object> mapParam , OKhttphelper.OKcallback oKcallback){
