@@ -44,7 +44,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
             }
         };
 
-        Intent[] intents = new Intent[1];
+        Intent[] intents = new Intent[0];
         Intent intent = new Intent();
         intent.setClassName("com.owen.crashhander","com.kfbll.BaseActivity.main")
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
