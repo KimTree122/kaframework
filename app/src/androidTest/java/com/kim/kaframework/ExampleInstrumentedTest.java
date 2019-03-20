@@ -31,6 +31,16 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
+    public  void  testsprit()
+    {
+        String str = "ABC|123";
+        String[] all = str.split("\\|");
+        for (int i = 0;i <all.length;i++){
+            Log.e(sysData.TAG,all[i]);
+        }
+    }
+
+    @Test
     public void MapTest()throws Exception{
 
         HashMap<String,String> map = new HashMap<>();

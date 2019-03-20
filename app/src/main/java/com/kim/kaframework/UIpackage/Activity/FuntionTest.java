@@ -35,6 +35,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 import BaseActivity.AbsBaseActivity;
@@ -169,7 +170,7 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
                         if (result == 0)continue;
                         byte[] data = new  byte[result];
                         is.read(data);
-                        String content = new String(data,"utf-8");
+                        String content = new String(data, StandardCharsets.UTF_8);
                         showLog(content);
                     }
 
@@ -189,7 +190,7 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
                 try {
                     OutputStream outputStream = socket.getOutputStream();
                     String msg = funtiontest_et_1.getText().toString();
-                    outputStream.write(msg.getBytes("utf-8"));
+                    outputStream.write(msg.getBytes(StandardCharsets.UTF_8));
                     outputStream.flush();
 
                 } catch (IOException e) {

@@ -34,4 +34,5 @@ dependencies {
     implementation files('libs/okhttp-3.8.1.jar')
     implementation files('libs/okio-1.13.0.jar')
     implementation files('libs/zxing.jar')
+    implementation files('libs/stetho-1.5.1-fatjar.jar')
 }

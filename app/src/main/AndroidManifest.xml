@@ -22,7 +22,7 @@
         <activity
             android:name=".UIpackage.Activity.ActivitySettings"
             android:label="@string/title_activity_settings"></activity>
-        <activity android:name=".UIpackage.Activity.FuntionTest"/>
+        <activity android:name=".UIpackage.Activity.FuntionTest" />
     </application>
 
 </manifest>

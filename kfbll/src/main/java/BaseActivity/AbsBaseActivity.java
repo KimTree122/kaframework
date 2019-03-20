@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.facebook.stetho.Stetho;
 import com.kim.kfbll.MessageEvent;
 import com.kim.kfbll.R;
 import com.kim.kfbll.sysData;
@@ -31,8 +32,8 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
     protected  void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-
-        CrashHelperInit();
+        Stetho.initializeWithDefaults(this);
+//        CrashHelperInit();
     }
 
     //初始化全局崩溃异常代码
@@ -46,7 +47,7 @@ public abstract class AbsBaseActivity extends AppCompatActivity {
 
         Intent[] intents = new Intent[0];
         Intent intent = new Intent();
-        intent.setClassName("com.owen.crashhander","com.kfbll.BaseActivity.main")
+        intent.setClassName("com.owen.crashhander","com.kfbll.BaseActivity.main");
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intents[0] = intent;
 
