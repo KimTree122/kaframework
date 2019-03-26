@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
 					//显示扫描到的内容
 					mTextView.setText(bundle.getString("result"));
 					//显示
-					mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
+//					mImageView.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
 				}
 				break;
 		}

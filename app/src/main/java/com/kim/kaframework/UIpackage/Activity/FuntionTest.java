@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -220,6 +221,14 @@ public class FuntionTest extends AbsBaseActivity implements View.OnClickListener
                     funtiontest_tv_title.setText(bundle.getString("result"));
                     //显示
                     funtiontest_image.setImageBitmap((Bitmap) data.getParcelableExtra("bitmap"));
+
+//                    连续扫描
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                    QRScan();
+//                        }
+//                    },1000);
                 }
                 break;
         }

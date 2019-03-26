@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
 //            EditDialog f = new EditDialog();
 //            f.setCancelable(false);
 //            f.show(getFragmentManager(),"show");
-
-
+//
+//
 //            DialogFragmentHelper.showConfirmDialog(getSupportFragmentManager(), "是否选择 Android？", new IDialogResultListener<Integer>() {
 //                @Override
 //                public void onDataResult(Integer result) {
