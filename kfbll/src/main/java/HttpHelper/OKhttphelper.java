@@ -17,7 +17,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class OKhttphelper implements IHttpHelper {
+public class  OKhttphelper implements IHttpHelper {
     private static final OKhttphelper ourInstance = new OKhttphelper();
 
      public static OKhttphelper getInstance() {
