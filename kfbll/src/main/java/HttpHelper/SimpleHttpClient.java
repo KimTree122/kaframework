@@ -62,7 +62,7 @@ public class SimpleHttpClient {
     }
 
     public  static Builder newBuilder(){
-        return newBuilder();
+        return new Builder();
     }
 
     public static class Builder {
@@ -113,7 +113,7 @@ public class SimpleHttpClient {
         }
         Uri.Builder builder = Uri.parse(mBuilder.url).buildUpon();
         for (RequestParm p : mBuilder.parms){
-            builder.appendQueryParameter(p.getKey(),p.getValue()==null?"",p.getValue().toString());
+            builder.appendQueryParameter(p.getKey(),p.getValue()==null?"":p.getValue().toString());
         }
         String url = builder.build().toString();
         return  url;

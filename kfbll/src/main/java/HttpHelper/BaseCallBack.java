@@ -10,7 +10,7 @@ import okhttp3.Call;
 
 public abstract class BaseCallBack<T> {
 
-    static Type getSuperclassTypeParameter(Class<?> subclass){
+    private static Type getSuperclassTypeParameter(Class<?> subclass){
         Type superclass = subclass.getGenericSuperclass();
         if (subclass instanceof Class){
             return  null;
@@ -24,7 +24,6 @@ public abstract class BaseCallBack<T> {
     public BaseCallBack(){
         //获取数据类型
         mType = getSuperclassTypeParameter(this.getClass());
-
 
     }
 
