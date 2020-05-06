@@ -20,7 +20,6 @@ import android.widget.Toast;
 
 import com.kim.kaframework.Adapter.ListViewCommonAdapter;
 import com.kim.kaframework.Adapter.ListViewHolder;
-import com.kim.kaframework.UIpackage.Activity.FuntionTest;
 import com.kim.kaframework.UIpackage.Fragment.MainLayout;
 import com.kim.kfdao.Model.PermissionFuntion;
 import org.greenrobot.eventbus.EventBus;
@@ -34,13 +33,12 @@ import ImageRes.FindImageRes;
 
 public class MainActivity extends AppCompatActivity implements EditDialog.EditDialogListener {
 
-    private Toolbar toolbar;
+//    private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private ListView listView;
-    private PermissionFuntionServer pfs;
-
-    private ListViewCommonAdapter<PermissionFuntion> adapter;
+//    private ActionBarDrawerToggle mDrawerToggle;
+//    private ListView listView;
+//    private PermissionFuntionServer pfs;
+//    private ListViewCommonAdapter<PermissionFuntion> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,25 +48,29 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
     }
 
     private void findViews() {
-        toolbar = (Toolbar) findViewById(R.id.toolbar_main_comment);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_main_comment);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout_main);
-        listView = (ListView)findViewById(R.id.drawerLayout_ListView);
+        ListView listView = (ListView)findViewById(R.id.drawerLayout_ListView);
 
         List<PermissionFuntion> funtions = InitData.getAllpflist();
 
-        pfs = new PermissionFuntionServer(funtions);
+        PermissionFuntionServer pfs = new PermissionFuntionServer(funtions);
 
         final List<PermissionFuntion> mainpermission = pfs.FilterPermissionFuntion(0);
 
         final FindImageRes fir = new FindImageRes(getApplicationContext());
 
-        listView.setAdapter(adapter = new ListViewCommonAdapter<PermissionFuntion>(this, mainpermission, R.layout.item_lv_sysico) {
+
+        ListViewCommonAdapter<PermissionFuntion> adapter = new ListViewCommonAdapter<PermissionFuntion>(this, mainpermission,
+                 R.layout.item_lv_sysico) {
             @Override
             public void convert(ListViewHolder holder, PermissionFuntion item) {
                 holder.setImage(R.id.item_sysico_iv,fir.getDrawableByStr(item.getPFEName()));
                 holder.setText(R.id.item_sysico_tv,item.getPFCName());
             }
-        });
+        };
+
+        listView.setAdapter(adapter);
 
         MainFagmentShow(1);
 
@@ -76,7 +78,8 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
         toolbar.setTitleTextColor(ContextCompat.getColor(getApplicationContext(),R.color.white)); //设置标题颜色
         setSupportActionBar(toolbar);
         toolbar.setPopupTheme(R.style.ToolbarPopupTheme);
-        mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,R.string.close){
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,toolbar,R.string.open,
+                 R.string.close){
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -92,9 +95,8 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
 
-                }
+                Log.e(sysData.TAG,"title:"+item.getTitle().toString()+" ID:"+item.getItemId());
                 return false;
             }
         });
@@ -136,17 +138,13 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
 
 
     private void  OpenLayout(String activityName)  {
-        Class aClass = null;
         try {
             String Activity = getApplicationContext().getPackageName()+"."+activityName;
-
-            aClass = Class.forName(Activity);
+            Class aClass = Class.forName(Activity);
+            startActivity(new Intent(MainActivity.this,aClass));
         }catch (ClassNotFoundException e){
-            Toast.makeText(getApplicationContext(),
-                    getResources().getString(R.string.notfoundclass),Toast.LENGTH_SHORT).show();
-            return;
+            showToast(getResources().getString(R.string.notfoundclass));
         }
-        startActivity(new Intent(MainActivity.this,aClass));
     }
 
     private void OpenFragment(String frammentName) {
@@ -159,28 +157,8 @@ public class MainActivity extends AppCompatActivity implements EditDialog.EditDi
             transaction.replace(R.id.drawerlayout_frameLayout,fragment);
             transaction.commit();
         }catch (Exception e){
-
-//            EditDialog f = new EditDialog();
-//            f.setCancelable(false);
-//            f.show(getFragmentManager(),"show");
-//
-//
-//            DialogFragmentHelper.showConfirmDialog(getSupportFragmentManager(), "是否选择 Android？", new IDialogResultListener<Integer>() {
-//                @Override
-//                public void onDataResult(Integer result) {
-//                    showToast("You Click Ok");
-//                }
-//            }, true, new CommonDialogFragment.OnDialogCancelListener() {
-//                @Override
-//                public void onCancel() {
-//                    showToast("You Click Cancel");
-//                }
-//            });
-
-            startActivity(new Intent(this, FuntionTest.class));
-
+            OpenLayout(frammentName);
         }
-
     }
 
 
